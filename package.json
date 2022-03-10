@@ -4,6 +4,7 @@
 	"description": "Sample Node.js web application using hapi, PostgreSQL, and Okta",
 	"main": "src/index.js",
 	"scripts": {
+    "watch": "nodemon src/index.js",
 		"dev": "nodemon --watch src -e css,ejs,js src/index.js",
 		"initdb": "node tools/initdb.js",
 		"lint": "eslint --fix ./",
@@ -15,7 +16,7 @@
 	"devDependencies": {
 		"eslint": "^6.8.0",
 		"eslint-config-reverentgeek": "^2.0.1",
-		"nodemon": "^2.0.2"
+		"nodemon": "^2.0.15"
 	},
 	"dependencies": {
 		"@hapi/bell": "^12.0.0",
