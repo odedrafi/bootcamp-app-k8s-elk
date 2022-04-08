@@ -77,15 +77,11 @@ stages:
     jobs:
       - job:
         steps:
-          - task: DownloadPipelineArtifact@2
+          - task: DownloadBuildArtifacts@1
             inputs:
-              buildType: 'specific'
-              project: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b'
-              definition: '7'
-              specificBuildWithTriggering: true
-              buildVersionToDownload: 'latest'
-              tags: 'Staging'
-              targetPath: '$(Pipeline.Workspace)'
+              buildType: 'current'
+              downloadType: 'specific'
+              downloadPath: '$(System.ArtifactsDirectory)'
 
 
   # - stgae: DeployProduction
