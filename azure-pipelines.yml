@@ -1,0 +1,72 @@
+name: build_$(Date:yyyyMMdd)$(Rev:r)
+ 
+trigger:
+  - master
+
+pool:
+  name: "Pool-1"
+
+stages:
+  - stage: build
+    jobs:
+      - job: build_on_linux
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "14.x"
+            displayName: "Install Node.js"
+
+
+          - task: Bash@3
+            inputs:
+              targetType: "inline"
+              script: |
+
+                echo  "# Host configuration
+
+                   HOST=0.0.0.0
+
+                   HOST_URL=http://$(public_ip):$(http_port)
+                   COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+                   NODE_ENV=development
+
+                   # Okta configuration
+                   OKTA_ORG_URL=https://$(okta_org_url)
+                   OKTA_CLIENT_ID=$(okta_client_id)
+                   OKTA_CLIENT_SECRET=$(okta_client_secret)
+
+                   # Postgres
+                   PGHOST=$(pg_host) 
+                   PGUSERNAME=$(pg_username)
+                   PGDATABASE=$(pg_database)
+                   PGPASSWORD=$(pg_password)
+                   PGPORT=5432" > .env
+          - script: |
+              echo "az devops login --organization https://dev.azure.com/odedrafi35/
+
+                     az artifacts universal publish
+                      --organization https://dev.azure.com/odedrafi35/
+                      --feed feed1
+                      --name my-first-package
+                      --version 0.0.1
+                      --description "Welcome to Universal Packages"
+                      --path . " > .npmrc
+            displayName: "Create & update .npmrc file To connect to azure artifacts"
+          
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: "$(Build.BinariesDirectory)"
+              includeRootFolder: true
+              archiveType: "zip"
+              archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip"
+              replaceExistingArchive: true
+
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: "$(Pipeline.Workspace)"
+              artifact: "arti"
+              publishLocation: "pipeline"
+
+  - stage: DeployStaging
+
+  # - stgae: DeployProduction
