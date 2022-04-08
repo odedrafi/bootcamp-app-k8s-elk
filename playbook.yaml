@@ -22,5 +22,4 @@
       args:
         chdir: "{{ deploy_directory }}/"
 
-    - name: Reboot
-      command: "reboot now"
+
