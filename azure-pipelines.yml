@@ -15,15 +15,15 @@ stages:
             inputs:
               versionSpec: "14.x"
             displayName: "Install Node.js"
-
-
+           
+          
           - task: Bash@3
             inputs:
               targetType: "inline"
               script: |
 
                 echo  "# Host configuration
-
+                   PORT=$(http_port)
                    HOST=0.0.0.0
 
                    HOST_URL=http://$(public_ip):$(http_port)
@@ -53,6 +53,12 @@ stages:
                       --path . " > .npmrc
             displayName: "Create & update .npmrc file To connect to azure artifacts"
           
+          - task: Npm@1
+            inputs:
+              command: 'install'
+              workingDir: '../'
+              customRegistry: 'useFeed'
+              customFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
           - task: ArchiveFiles@2
             inputs:
               rootFolderOrFile: "$(Build.BinariesDirectory)"
