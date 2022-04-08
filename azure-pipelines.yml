@@ -61,17 +61,11 @@ stages:
               customFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
           - task: ArchiveFiles@2
             inputs:
-              rootFolderOrFile: "$(Build.BinariesDirectory)"
+              rootFolderOrFile: '$(Build.BinariesDirectory)'
               includeRootFolder: true
-              archiveType: "zip"
-              archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip"
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
               replaceExistingArchive: true
-
-          - task: PublishPipelineArtifact@1
-            inputs:
-              targetPath: "$(Pipeline.Workspace)"
-              artifact: "arti"
-              publishLocation: "pipeline"
 
   #- stage: DeployStaging
 
