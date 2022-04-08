@@ -3,14 +3,22 @@
   become: true
   vars_files:
     - "Vars.yaml"
+  
+- jobs:
+    - job:
+      steps:
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '{{ deploy_directory }}'
+            Contents: '**'
+            TargetFolder: '{{ deploy_directory }}'    
+
+
+
 
   tasks:
 
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(system.teamProject)'
-        Contents: '**'
-        TargetFolder: '$(deploy_directory)'    
+   
     - name: Database initialization
       shell: npm run initdb
       async: 30
