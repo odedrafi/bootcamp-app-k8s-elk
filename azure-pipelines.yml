@@ -21,7 +21,7 @@ stages:
             inputs:
               targetType: "inline"
               script: |
-
+                sudo apt-get -y install zip
                 echo  "# Host configuration
                    PORT=$(http_port)
                    HOST=0.0.0.0
@@ -53,6 +53,7 @@ stages:
                       --path .. " > .npmrc
             displayName: "Create & update .npmrc file To connect to azure artifacts"
           
+
           - task: Npm@1
             inputs:
               command: 'install'
