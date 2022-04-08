@@ -6,7 +6,11 @@
 
   tasks:
 
-
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(system.teamProject)'
+        Contents: '**'
+        TargetFolder: '$(deploy_directory)'    
     - name: Database initialization
       shell: npm run initdb
       async: 30
