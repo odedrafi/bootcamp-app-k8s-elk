@@ -88,6 +88,7 @@ stages:
               destinationFolder: 'bootcamp-app'
               cleanDestinationFolder: true
               overwriteExistingFiles: false
-          - script: ansible-playbook -i Inventory playbook.yaml --extra-vars "group=Staging"
+          - script: |
+              ansible-playbook -i Inventory playbook.yaml --extra-vars "group=Staging"
           
   # - stgae: DeployProduction
