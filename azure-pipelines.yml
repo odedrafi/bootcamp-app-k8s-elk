@@ -4,7 +4,7 @@ trigger:
   - master
 
 pool:
-  name: "Defulte"
+  name: "Default"
 
 stages:
   - stage: build
