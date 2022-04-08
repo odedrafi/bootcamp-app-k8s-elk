@@ -73,6 +73,6 @@ stages:
               artifact: "arti"
               publishLocation: "pipeline"
 
-  - stage: DeployStaging
+  #- stage: DeployStaging
 
   # - stgae: DeployProduction
