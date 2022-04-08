@@ -82,6 +82,11 @@ stages:
               buildType: 'current'
               downloadType: 'specific'
               downloadPath: '$(System.ArtifactsDirectory)'
-
+          - task: ExtractFiles@1
+            inputs:
+              archiveFilePatterns: '**/*.zip'
+              destinationFolder: 'bootcamp-app'
+              cleanDestinationFolder: true
+              overwriteExistingFiles: false
 
   # - stgae: DeployProduction
