@@ -7,33 +7,26 @@ tasks:
       downloadPath: '$(System.ArtifactsDirectory)'
 
 
----
-- hosts: "{{ group }}"
-  become: true
-  vars_files:
-    - "Vars.yaml"
-      
+  ---
+  - hosts: "{{ group }}"
+    become: true
+    vars_files:
+      - "Vars.yaml"
+        
 
 
-    - name: Database initialization
-      shell: npm run initdb
-      async: 30
-      poll: 0
-      args:
-        chdir: "{{ deploy_directory }}/"
+      - name: Database initialization
+        shell: npm run initdb
+        async: 30
+        poll: 0
+        args:
+          chdir: "{{ deploy_directory }}/"
 
-    - name: Install pm2
-      shell: npm install pm2@latest -g
+      - name: Install pm2
+        shell: npm install pm2@latest -g
 
-    - name: Run application
-      shell: pm2 start npm -- run dev && pm2 save && pm2 startup
-      args:
-        chdir: "{{ deploy_directory }}/"
+      - name: Run application
+        shell: pm2 start npm -- run dev && pm2 save && pm2 startup
+        args:
+          chdir: "{{ deploy_directory }}/"
 
-
-
-    - task: DownloadBuildArtifacts@1
-      inputs:
-        buildType: 'current'
-        downloadType: 'specific'
-        downloadPath: '$(System.ArtifactsDirectory)'
