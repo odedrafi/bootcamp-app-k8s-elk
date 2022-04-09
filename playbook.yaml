@@ -7,21 +7,21 @@
   
   tasks:
 
-  # - name: Update apt repo and cache on all Debian/Ubuntu boxes
-  #   apt:
-  #    update_cache: yes
-  #    force_apt_get: yes
-  #    cache_valid_time: 3600
+  - name: Update apt repo and cache on all Debian/Ubuntu boxes
+    apt:
+     update_cache: yes
+     force_apt_get: yes
+     cache_valid_time: 3600
 
-  # - name: copy files from ServerA to ServerB
-  #   copy:
-  #     src: /home/adminuser/myagent/_work/1/s
-  #     dest: /home/adminuser/bootcamp-app
+  - name: copy files from ServerA to ServerB
+    copy:
+      src: /home/adminuser/myagent/_work/1/s
+      dest: /home/adminuser/bootcamp-app
 
-  # - name: Install node dependencies
-  #   shell: npm install
-  #   args:
-  #     chdir: "{{ deploy_directory }}/"
+  - name: Install node dependencies
+    shell: npm install
+    args:
+      chdir: "/home/adminuser/bootcamp-app/s"
 
   # - name: install unzip
   #   shell:
@@ -35,7 +35,7 @@
   # - name: Ansible copy directory to the remote server
   #   copy:
   #     src:/myagent/_work/1/s/
-  #     dest:"{{ deploy_directory }}/"
+  #     dest:"/home/adminuser/bootcamp-app/s"
  
   # - name: Npm initialization
   #   shell: npm init -y
