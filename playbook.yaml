@@ -6,11 +6,17 @@
   
   
   tasks:
+  - name: install unzip
+    shell:
+      cmd: sudo apt install unzip
+      chdir: /home/azureuser
+      executable: /bin/bash
 
-  - name: Transfer file from ServerA to ServerB
-    synchronize:
-      src: /home/adminuser/myagent/_work/1/s/
-      dest: /home/adminuser/bootcamp-app
+      
+  # - name: Transfer file from ServerA to ServerB
+  #   synchronize:
+  #     src: /home/adminuser/myagent/_work/1/s/
+  #     dest: /home/adminuser/bootcamp-app
   
   # - name: Ansible copy directory to the remote server
   #   copy:
