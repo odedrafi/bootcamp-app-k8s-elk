@@ -82,12 +82,12 @@ stages:
               buildType: 'current'
               downloadType: 'specific'
               downloadPath: '$(System.ArtifactsDirectory)'
-          # - task: ExtractFiles@1
-          #   inputs:
-          #     archiveFilePatterns: '../**/*.zip'
-          #     destinationFolder: 'bootcamp-app'
-          #     cleanDestinationFolder: true
-          #     overwriteExistingFiles: false
+          - task: ExtractFiles@1
+            inputs:
+              archiveFilePatterns: '../**/*.zip'
+              destinationFolder: 'bootcamp-app'
+              cleanDestinationFolder: true
+              overwriteExistingFiles: false
           - script: |
               ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging"
           
