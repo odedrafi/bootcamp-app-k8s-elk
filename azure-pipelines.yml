@@ -54,7 +54,32 @@ stages:
                       --path .. " > .npmrc
             displayName: "Create & update .npmrc file To connect to azure artifacts"
           
+          - task: Bash@3
+            inputs:
+              targetType: "inline"
+              script: |
+                sudo apt-get -y install zip
+                echo  "# Host configuration
+                   PORT=$(http_port)
+                   HOST=0.0.0.0
 
+                   HOST_URL=http://$(production_public_ip):$(http_port)
+                   COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+                   NODE_ENV=development
+
+                   # Okta configuration
+                   OKTA_ORG_URL=https://$(okta_org_url)
+                   OKTA_CLIENT_ID=$(okta_client_id)
+                   OKTA_CLIENT_SECRET=$(okta_client_secret)
+
+                   # Postgres
+                   PGHOST=$(production_host) 
+                   PGUSERNAME=$(pg_username)
+                   PGDATABASE=$(pg_database)
+                   PGPASSWORD=$(pg_password)
+                   PGPORT=5432" > production.env
+            displayName: "Create & update .npmrc file To connect to azure artifacts"
+          
           - task: Npm@1
             inputs:
               command: 'install'
