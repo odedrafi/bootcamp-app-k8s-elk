@@ -138,5 +138,5 @@ stages:
               cleanDestinationFolder: true
               overwriteExistingFiles: false
           - script: |
-              ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/a/arti/s/productionVar.yaml"
+              ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/a/arti/s/productionVAr.yaml"
           
