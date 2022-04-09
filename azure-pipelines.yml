@@ -89,6 +89,6 @@ stages:
               cleanDestinationFolder: true
               overwriteExistingFiles: false
           - script: |
-              ansible-playbook  playbook.yaml --extra-vars "group=Staging"
+              ansible-playbook -i inventory.ini playbook.yaml --extra-vars "group=Staging"
           
   # - stgae: DeployProduction
