@@ -7,21 +7,21 @@
   
   tasks:
 
-  - name: Update apt repo and cache on all Debian/Ubuntu boxes
-    apt:
-     update_cache: yes
-     force_apt_get: yes
-     cache_valid_time: 3600
+  # - name: Update apt repo and cache on all Debian/Ubuntu boxes
+  #   apt:
+  #    update_cache: yes
+  #    force_apt_get: yes
+  #    cache_valid_time: 3600
 
-  - name: Transfer file from ServerA to ServerB
-    synchronize:
-      src: /home/adminuser/bootcamp-app
-      dest: /home/adminuser/myagent/_work/1/s/
+  # - name: copy files from ServerA to ServerB
+  #   copy:
+  #     src: /home/adminuser/myagent/_work/1/s
+  #     dest: /home/adminuser/bootcamp-app
 
-  - name: Install node dependencies
-    shell: npm install
-    args:
-      chdir: "{{ deploy_directory }}/"
+  # - name: Install node dependencies
+  #   shell: npm install
+  #   args:
+  #     chdir: "{{ deploy_directory }}/"
 
   # - name: install unzip
   #   shell:
@@ -37,23 +37,23 @@
   #     src:/myagent/_work/1/s/
   #     dest:"{{ deploy_directory }}/"
  
-  - name: Npm initialization
-    shell: npm init -y
-    args:
-      chdir: "{{ deploy_directory }}/"  
+  # - name: Npm initialization
+  #   shell: npm init -y
+  #   args:
+  #     chdir: "{{ deploy_directory }}/"  
   
-  - name: Database initialization
-    shell: npm run initdb
-    async: 30
-    poll: 0
-    args:
-      chdir: "{{ deploy_directory }}/"
+  # - name: Database initialization
+  #   shell: npm run initdb
+  #   async: 30
+  #   poll: 0
+  #   args:
+  #     chdir: "{{ deploy_directory }}/"
 
-  - name: Install pm2
-    shell: npm install pm2@latest -g
+  # - name: Install pm2
+  #   shell: npm install pm2@latest -g
 
-  - name: Run application
-    shell: pm2 start npm -- run dev && pm2 save && pm2 startup
-    args:
-      chdir: "{{ deploy_directory }}/"
+  # - name: Run application
+  #   shell: pm2 start npm -- run dev && pm2 save && pm2 startup
+  #   args:
+  #     chdir: "{{ deploy_directory }}/"
 
