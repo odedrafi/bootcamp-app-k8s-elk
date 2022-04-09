@@ -13,17 +13,18 @@
      force_apt_get: yes
      cache_valid_time: 3600
 
-  - name: install unzip
-    shell:
-      cmd: apt install unzip
-      chdir: /home/adminuser
-      executable: /bin/bash
+  # - name: install unzip
+  #   shell:
+  #     cmd: apt install unzip
+  #     chdir: /home/adminuser
+  #     executable: /bin/bash
 
 
   - name: Transfer file from ServerA to ServerB
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/
       dest: /home/adminuser/bootcamp-app
+      mode: pull
   
   # - name: Ansible copy directory to the remote server
   #   copy:
