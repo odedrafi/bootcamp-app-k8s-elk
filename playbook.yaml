@@ -6,15 +6,15 @@
 
   tasks:
 
-  # - name:
-  #   synchronize:
-  #     src: /myagent/_work/1/s/
-  #     dest: "{{ deploy_directory }}/"
+  - name: Transfer file from ServerA to ServerB
+    synchronize:
+      src: /home/adminuser/myagent/_work/1/s/
+      dest: /home/adminuser/bootcamp-app
   
-  - name: Ansible copy directory to the remote server
-    copy:
-      src:/myagent/_work/1/s/
-      dest:"{{ deploy_directory }}/"
+  # - name: Ansible copy directory to the remote server
+  #   copy:
+  #     src:/myagent/_work/1/s/
+  #     dest:"{{ deploy_directory }}/"
 
   - name: Database initialization
     shell: npm run initdb
