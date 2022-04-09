@@ -12,11 +12,12 @@
      update_cache: yes
      force_apt_get: yes
      cache_valid_time: 3600
+
   - name: Transfer file from ServerA to ServerB
-  synchronize:
-    src: /home/adminuser/myagent/_work/1/s/
-    dest: /home/adminuser/bootcamp-app
-    mode: pull
+    synchronize:
+      src: /home/adminuser/bootcamp-app
+      dest: /home/adminuser/myagent/_work/1/s/
+
   - name: Install node dependencies
     shell: npm install
     args:
