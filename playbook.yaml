@@ -14,7 +14,7 @@
   - name: Ansible copy directory to the remote server
     copy:
       src:/myagent/_work/1/s/
-       dest:"{{ deploy_directory }}/"
+      dest:"{{ deploy_directory }}/"
 
   - name: Database initialization
     shell: npm run initdb
