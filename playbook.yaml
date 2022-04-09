@@ -1,7 +1,8 @@
 ---
 - hosts: "{{ group }}"
   become: true
-  vars_files:  - "{{ Var_file }}/"
+  vars_files:  
+    - "{{ Var_file }}/"
 
 
   tasks:
