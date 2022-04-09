@@ -1,29 +1,28 @@
+---
+- hosts: "{{ group }}"
+  become: true
+  vars_files:
+    - "{{ var_file_path }}"
 
-    ---
-    - hosts: "{{ group }}"
-      become: true
-      vars_files:
-        - "Vars.yaml"
-          
+  tasks:
+    - name: Synchronization of src on the control machine to dest on the remote hosts
+      ansible.posix.synchronize:
+      src: /myagent/_work/1/s/
+      dest: "{{ deploy_directory }}/"
+    - name: Database initialization
+      shell: npm run initdb
+      async: 30
+      poll: 0
+      args:
+        chdir: "{{ deploy_directory }}/"
 
-    - tasks:
-        - name: Synchronization of src on the control machine to dest on the remote hosts
-          ansible.posix.synchronize:
-          src: /myagent/_work/1/s/
-          dest: "{{ deploy_directory }}/"
+    - name: Install pm2
+      shell: npm install pm2@latest -g
 
-        - name: Database initialization
-          shell: npm run initdb
-          async: 30
-          poll: 0
-          args:
-            chdir: "{{ deploy_directory }}/"
+    - name: Run application
+      shell: pm2 start npm -- run dev && pm2 save && pm2 startup
+      args:
+        chdir: "{{ deploy_directory }}/"
 
-        - name: Install pm2
-          shell: npm install pm2@latest -g
-
-        - name: Run application
-          shell: pm2 start npm -- run dev && pm2 save && pm2 startup
-          args:
-            chdir: "{{ deploy_directory }}/"
-
+    - name: Reboot
+      command: "reboot now"
