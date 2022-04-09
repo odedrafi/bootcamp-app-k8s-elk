@@ -4,8 +4,6 @@
   vars_files:
     - "Vars.yaml"
 
-  tasks:
-
   - name: Transfer file from ServerA to ServerB
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/
