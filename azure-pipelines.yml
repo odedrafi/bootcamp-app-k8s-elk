@@ -3,13 +3,14 @@ name: build_$(Date:yyyyMMdd)$(Rev:r)
 trigger:
   - master
 
-pool:
-  name: "Default"
+
 
 stages:
   - stage: build
     jobs:
       - job: build_on_linux
+        pool:
+          name: "Default"
         steps:
           - task: NodeTool@0
             inputs:
@@ -76,6 +77,8 @@ stages:
   - stage: DeployStaging
     jobs:
       - job:
+        pool:
+          name: "Default"
         steps:
           - task: DownloadBuildArtifacts@1
             inputs:
@@ -91,4 +94,24 @@ stages:
           - script: |
               ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging"
           
-  # - stgae: DeployProduction
+  - stage: DeployProduction
+    
+    jobs:
+      - job:
+        pool:
+          name: "production"
+        steps:
+          - task: DownloadBuildArtifacts@1
+            inputs:
+              buildType: 'current'
+              downloadType: 'specific'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          - task: ExtractFiles@1
+            inputs:
+              archiveFilePatterns: '../**/*.zip'
+              destinationFolder: 'bootcamp-app'
+              cleanDestinationFolder: true
+              overwriteExistingFiles: false
+          - script: |
+              ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production"
+          
