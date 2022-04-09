@@ -1,3 +1,5 @@
+
+
 ---
 - hosts: "{{ group }}"
   become: true
@@ -5,8 +7,12 @@
     - "Vars.yaml"
       
   tasks:
+     - task: DownloadBuildArtifacts@1
+       inputs:
+         buildType: 'current'
+         downloadType: 'specific'
+         downloadPath: '$(System.ArtifactsDirectory)'
 
-   
     - name: Database initialization
       shell: npm run initdb
       async: 30
@@ -23,3 +29,9 @@
         chdir: "{{ deploy_directory }}/"
 
 
+
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'specific'
+        downloadPath: '$(System.ArtifactsDirectory)'
