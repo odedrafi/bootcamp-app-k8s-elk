@@ -14,7 +14,7 @@ tasks:
       - "Vars.yaml"
         
 
-
+  - tasks:
       - name: Database initialization
         shell: npm run initdb
         async: 30
