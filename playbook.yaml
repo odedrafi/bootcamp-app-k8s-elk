@@ -3,19 +3,7 @@
   become: true
   vars_files:
     - "Vars.yaml"
-  
-- jobs:
-    - job:
-      steps:
-        - task: CopyFiles@2
-          inputs:
-            SourceFolder: '{{ deploy_directory }}'
-            Contents: '**'
-            TargetFolder: '{{ deploy_directory }}'    
-
-
-
-
+      
   tasks:
 
    
