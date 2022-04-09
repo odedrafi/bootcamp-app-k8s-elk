@@ -1,12 +1,4 @@
 
-tasks:
-  - task: DownloadBuildArtifacts@1
-    inputs:
-      buildType: 'current'
-      downloadType: 'specific'
-      downloadPath: '$(System.ArtifactsDirectory)'
-
-  - task: Play
     ---
     - hosts: "{{ group }}"
       become: true
@@ -15,6 +7,11 @@ tasks:
           
 
     - tasks:
+        - name: Synchronization of src on the control machine to dest on the remote hosts
+          ansible.posix.synchronize:
+          src: /myagent/_work/1/s/
+          dest: "{{ deploy_directory }}/"
+
         - name: Database initialization
           shell: npm run initdb
           async: 30
