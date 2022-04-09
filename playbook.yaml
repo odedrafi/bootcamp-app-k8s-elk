@@ -20,34 +20,22 @@
 
   - name: Install node dependencies
     shell: npm install
+    become: true
     args:
       chdir: "/home/adminuser/bootcamp-app/s"
 
-  # - name: install unzip
-  #   shell:
-  #     cmd: apt install unzip
-  #     chdir: /home/adminuser
-  #     executable: /bin/bash
-
-
-
-  
-  # - name: Ansible copy directory to the remote server
-  #   copy:
-  #     src:/myagent/_work/1/s/
-  #     dest:"/home/adminuser/bootcamp-app/s"
- 
-  # - name: Npm initialization
-  #   shell: npm init -y
-  #   args:
-  #     chdir: "{{ deploy_directory }}/"  
+  - name: Npm initialization
+    shell: npm init -y
+    become: true 
+    args:
+     chdir: "/home/adminuser/bootcamp-app/s"  
   
   # - name: Database initialization
   #   shell: npm run initdb
   #   async: 30
   #   poll: 0
   #   args:
-  #     chdir: "{{ deploy_directory }}/"
+  #     chdir: "/home/adminuser/bootcamp-app/s"
 
   # - name: Install pm2
   #   shell: npm install pm2@latest -g
@@ -55,5 +43,5 @@
   # - name: Run application
   #   shell: pm2 start npm -- run dev && pm2 save && pm2 startup
   #   args:
-  #     chdir: "{{ deploy_directory }}/"
+  #     chdir: "/home/adminuser/bootcamp-app/s"
 
