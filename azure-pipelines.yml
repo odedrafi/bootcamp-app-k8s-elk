@@ -48,8 +48,8 @@ stages:
                      az artifacts universal publish
                       --organization https://dev.azure.com/odedrafi35/
                       --feed feed1
-                      --name my-first-package
-                      --version 0.0.1
+                      --name artifact
+                      --version 0.0.1$(Rev:r)
                       --description "Welcome to Universal Packages"
                       --path .. " > .npmrc
             displayName: "Create & update .npmrc file To connect to azure artifacts"
@@ -98,6 +98,14 @@ stages:
               targetPath: '$(Pipeline.Workspace)'
               artifact: 'arti'
               publishLocation: 'pipeline'
+          - task: UniversalPackages@0
+            inputs:
+              command: 'publish'
+              publishDirectory: '$(Build.ArtifactStagingDirectory)'
+              feedsToUsePublish: 'internal'
+              vstsFeedPublish: '83c24fb4-387d-49b2-a813-98c9283e4af6'
+              vstsFeedPackagePublish: 'artifact'
+              versionOption: 'patch'
 
   - stage: DeployStaging
     jobs:
@@ -110,6 +118,13 @@ stages:
               buildType: 'current'
               downloadType: 'specific'
               downloadPath: '$(System.ArtifactsDirectory)'
+          - task: UniversalPackages@0
+            inputs:
+              command: 'download'
+              downloadDirectory: '$(System.DefaultWorkingDirectory)'
+              feedsToUse: 'internal'
+              vstsFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
+              vstsPackageVersion: '*.*.*'
           - task: ExtractFiles@1
             inputs:
               archiveFilePatterns: '../**/*.zip'
