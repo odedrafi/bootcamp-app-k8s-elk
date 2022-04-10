@@ -21,26 +21,6 @@
       src: /home/adminuser/myagent/_work/1/s/.env
       dest: /home/adminuser/bootcamp-app
 
-  # - name: env
-  #   copy:
-  #     dest: "/home/adminuser/bootcamp-app/.env"
-  #     content: |
-  #         # Host configuration
-  #         PORT={{ http_port }}
-  #         HOST=0.0.0.0
-  #         HOST_URL=http://{{ public_ip }}:{{ http_port }}
-  #         COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
-  #         NODE_ENV=development
-  #         # Okta configuration
-  #         OKTA_ORG_URL=https://{{ okta_org_url }}
-  #         OKTA_CLIENT_ID={{ okta_client_id }}
-  #         OKTA_CLIENT_SECRET={{ okta_client_secret }}
-  #         # Postgres
-  #         PGHOST={{ pg_host }} 
-  #         PGUSERNAME={{ pg_username }}
-  #         PGDATABASE={{ pg_database }}
-  #         PGPASSWORD={{ pg_password }}
-  #         PGPORT=5432
   
   - name: Update nodejs package
 
@@ -49,10 +29,6 @@
   - name: Install nodejs
     become: true
     shell: apt-get install -y nodejs
-
-#  - name:
-#    become: true
-#    shell: npm audit fix
 
   - name: Install node dependencies
     shell: npm install
