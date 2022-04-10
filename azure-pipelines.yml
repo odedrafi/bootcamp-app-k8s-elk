@@ -82,8 +82,8 @@ stages:
           # - script: |
           #      AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal publish    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact    --version 0.0.1    --description "Welcome to Universal Packages"    --path .
                      
-          - script: |
-               AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal download    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact    --version 0.0.1       --path .
+          # - script: |
+          #      AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal download    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact    --version 0.0.1       --path .
              
                           
           - task: ArchiveFiles@2
@@ -103,15 +103,7 @@ stages:
                pathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
                artifactName: 'artifact'
             displayName: 'Publish Artifact'
-          # - task: UniversalPackages@0
-          #   inputs:
-          #     command: 'publish'
-          #     publishDirectory: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)'
-          #     feedsToUsePublish: 'internal'
-          #     vstsFeedPublish: 'feed1'
-          #     vstsFeedPackagePublish: 'artifact'
-          #     versionOption: 'patch'
-          #     packagePublishDescription: 'publish the zip into azure artifact'
+
           
   - stage: DeployStaging
     jobs:
@@ -124,6 +116,7 @@ stages:
               buildType: 'current'
               downloadType: 'specific'
               downloadPath: '$(System.ArtifactsDirectory)'
+
           # - task: UniversalPackages@0
           #   inputs:
           #     command: 'download'
@@ -147,6 +140,11 @@ stages:
         pool:
           name: "production"
         steps:
+          
+          - script: |
+               AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal download    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact    --version 0.0.1       --path .
+             
+
           - task: DownloadBuildArtifacts@1
             inputs:
               buildType: 'current'
