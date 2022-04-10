@@ -12,14 +12,14 @@
   - name: Transfer folder from agentServer to hosting servers
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/package.json
-      dest: /home/adminuser/bootcamp-app  
+      dest: /home/adminuser/  
     
       
       
   - name: Transfer folder from agentServer to hosting servers
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/
-      dest: /home/adminuser/bootcamp-app/
+      dest: /home/adminuser/
 
   - name: Transfer file from agentServer to hosting servers
     synchronize:
