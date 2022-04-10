@@ -12,10 +12,10 @@ stages:
         pool:
           name: "Default"
         steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: "14.x"
-            displayName: "Install Node.js"
+          # - task: NodeTool@0
+          #   inputs:
+          #     versionSpec: "14.x"
+          #   displayName: "Install Node.js"
            
           
           - task: Bash@3
