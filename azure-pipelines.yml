@@ -84,7 +84,7 @@ stages:
         pool:
           name: "production"
         steps:
-           - script: |
+          - script: |
               az config set extension.use_dynamic_install=yes_without_prompt  
           - script: |
               curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash         
