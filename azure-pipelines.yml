@@ -75,7 +75,7 @@ stages:
               cleanDestinationFolder: true
               overwriteExistingFiles: false
           - script: |
-              echo "
+              cat  << EOF > .env
                     # Host configuration
                 PORT= $(http_port) 
                 HOST=0.0.0.0
@@ -91,7 +91,8 @@ stages:
                 PGUSERNAME=$(pg_username) 
                 PGDATABASE=$(pg_database) 
                 PGPASSWORD=$(pg_password) 
-                PGPORT=5432" > .env   
+                PGPORT=5432
+                EOF  
           - script: |
               ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging Var_file=/home/adminuser/myagent/_work/1/s/stagingVar.yaml"
           
@@ -123,7 +124,7 @@ stages:
               overwriteExistingFiles: false
               
           - script: |
-              echo "
+              cat  << EOF > .env
                     # Host configuration
                 PORT= $(http_port) 
                 HOST=0.0.0.0
@@ -139,7 +140,8 @@ stages:
                 PGUSERNAME=$(pg_username) 
                 PGDATABASE=$(pg_database) 
                 PGPASSWORD=$(pg_password) 
-                PGPORT=5432" > .env               
+                PGPORT=5432 
+                EOF             
           - script: |
               ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/s/productionVAr.yaml"
                 
