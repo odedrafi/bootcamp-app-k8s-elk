@@ -63,7 +63,7 @@ stages:
             inputs:
               buildType: 'current'
               downloadType: 'specific'
-              downloadPath: '$(System.ArtifactsDirectory)'
+              downloadPath: '$(Build.SourcesDirectory)'
           - task: ExtractFiles@1
             inputs:
               archiveFilePatterns: '../**/*.zip'
