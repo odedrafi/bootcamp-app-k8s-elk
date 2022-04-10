@@ -1,8 +1,6 @@
 ---
 - hosts: "{{ group }}"
   become: true
-  vars_files:  
-    - "{{ Var_file }}/"
 
   tasks:
 
@@ -20,22 +18,6 @@
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/.env
       dest: /home/adminuser/bootcamp-app
-
-  
-  - name: Update nodejs package
-
-    shell: curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-
-  - name: Install nodejs
-    become: true
-    shell: apt-get install -y nodejs
-
-  - name: Install node dependencies
-    shell: npm install
-    become: true
-    args:
-      chdir: "/home/adminuser/bootcamp-app"
-
   - name: Database initialization
     shell: npm run initdb
     async: 30
