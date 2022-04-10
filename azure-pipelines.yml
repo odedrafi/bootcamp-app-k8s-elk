@@ -138,7 +138,7 @@ stages:
               cleanDestinationFolder: true
               overwriteExistingFiles: false
           - script: |
-              ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging Var_file=/home/adminuser/myagent/_work/1/a/arti/s/stagingVar.yaml"
+              ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging Var_file=/home/adminuser/myagent/_work/1/a/s/stagingVar.yaml"
           
   - stage: DeployProduction
     
@@ -159,5 +159,5 @@ stages:
               cleanDestinationFolder: true
               overwriteExistingFiles: false
           - script: |
-              ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/a/arti/s/productionVAr.yaml"
+              ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/a/s/productionVAr.yaml"
                 
