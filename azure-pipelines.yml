@@ -104,6 +104,8 @@ stages:
                   buildType: 'current'
                   downloadType: 'specific'
                   downloadPath: '$(System.ArtifactsDirectory)'
+              - script: |
+                  sudo apt-get update $$ sudo apt install unzip    
               - task: ExtractFiles@1
                 inputs:
                   archiveFilePatterns: '../**/*.zip'
