@@ -94,27 +94,27 @@ stages:
               workingDir: '../'
               customRegistry: 'useFeed'
               customFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
-          - task: ArchiveFiles@2
-            inputs:
-              rootFolderOrFile: '$(Build.BinariesDirectory)'
-              includeRootFolder: true
-              archiveType: 'zip'
-              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-              replaceExistingArchive: true
-          - task: PublishPipelineArtifact@1
-            inputs:
-              targetPath: '$(Pipeline.Workspace)'
-              artifact: 'arti'
-              publishLocation: 'pipeline'
-          
-          # - task: UniversalPackages@0
+          # - task: ArchiveFiles@2
           #   inputs:
-          #     command: 'publish'
-          #     publishDirectory: '$(Build.ArtifactStagingDirectory)'
-          #     feedsToUsePublish: 'internal'
-          #     vstsFeedPublish: 'feed1'
-          #     vstsFeedPackagePublish: 'arti2.0.0'
-          #     versionOption: 'patch'
+          #     rootFolderOrFile: '$(Build.BinariesDirectory)'
+          #     includeRootFolder: true
+          #     archiveType: 'zip'
+          #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+          #     replaceExistingArchive: true
+          # - task: PublishPipelineArtifact@1
+          #   inputs:
+          #     targetPath: '$(Pipeline.Workspace)'
+          #     artifact: 'arti'
+          #     publishLocation: 'pipeline'
+          
+          - task: UniversalPackages@0
+            inputs:
+              command: 'publish'
+              publishDirectory: '$(Build.ArtifactStagingDirectory)'
+              feedsToUsePublish: 'internal'
+              vstsFeedPublish: 'feed1'
+              vstsFeedPackagePublish: 'arti2.0.0'
+              versionOption: 'patch'
 
   - stage: DeployStaging
     jobs:
@@ -127,13 +127,13 @@ stages:
               buildType: 'current'
               downloadType: 'specific'
               downloadPath: '$(System.ArtifactsDirectory)'
-          - task: UniversalPackages@0
-            inputs:
-              command: 'download'
-              downloadDirectory: '$(System.DefaultWorkingDirectory)'
-              feedsToUse: 'internal'
-              vstsFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
-              vstsPackageVersion: '*.*.*'
+          # - task: UniversalPackages@0
+          #   inputs:
+          #     command: 'download'
+          #     downloadDirectory: '$(System.DefaultWorkingDirectory)'
+          #     feedsToUse: 'internal'
+          #     vstsFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
+          #     vstsPackageVersion: '*.*.*'
           - task: ExtractFiles@1
             inputs:
               archiveFilePatterns: '../**/*.zip'
