@@ -105,7 +105,9 @@ stages:
                   downloadType: 'specific'
                   downloadPath: '$(System.ArtifactsDirectory)'
               - script: |
-                  sudo apt-get update $$ sudo apt install unzip    
+                  sudo apt update 
+                  sudo apt install unzip 
+                displayName: install unzip  
               - task: ExtractFiles@1
                 inputs:
                   archiveFilePatterns: '../**/*.zip'
@@ -132,6 +134,7 @@ stages:
                   PGPASSWORD=$(pg_password)
                   PGPORT=5432
                   EOF
+                displayName: .env  
               - script: |
                   ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production"
-                        
+                displayName: Ansible        
