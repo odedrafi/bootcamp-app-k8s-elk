@@ -75,6 +75,24 @@ stages:
               cleanDestinationFolder: true
               overwriteExistingFiles: false
           - script: |
+              echo "
+                    # Host configuration
+                PORT= $(http_port) 
+                HOST=0.0.0.0
+                HOST_URL=http://$(public_ip):$(http_port) 
+                COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+                NODE_ENV=development
+                # Okta configuration
+                OKTA_ORG_URL=https://$(okta_org_url) 
+                OKTA_CLIENT_ID= $(okta_client_id) 
+                OKTA_CLIENT_SECRET= $(okta_client_secret) 
+                # Postgres
+                PGHOST $(pg_host)  
+                PGUSERNAME=$(pg_username) 
+                PGDATABASE=$(pg_database) 
+                PGPASSWORD=$(pg_password) 
+                PGPORT=5432" > .env   
+          - script: |
               ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging Var_file=/home/adminuser/myagent/_work/1/s/stagingVar.yaml"
           
   - stage: DeployProduction
@@ -103,6 +121,25 @@ stages:
               destinationFolder: 'bootcamp-app'
               cleanDestinationFolder: true
               overwriteExistingFiles: false
+              
+          - script: |
+              echo "
+                    # Host configuration
+                PORT= $(http_port) 
+                HOST=0.0.0.0
+                HOST_URL=http://$(production_public_ip):$(http_port) 
+                COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+                NODE_ENV=development
+                # Okta configuration
+                OKTA_ORG_URL=https://$(okta_org_url) 
+                OKTA_CLIENT_ID= $(okta_client_id) 
+                OKTA_CLIENT_SECRET= $(okta_client_secret) 
+                # Postgres
+                PGHOST $(production_host)  
+                PGUSERNAME=$(pg_username) 
+                PGDATABASE=$(pg_database) 
+                PGPASSWORD=$(pg_password) 
+                PGPORT=5432" > .env               
           - script: |
               ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/s/productionVAr.yaml"
                 
