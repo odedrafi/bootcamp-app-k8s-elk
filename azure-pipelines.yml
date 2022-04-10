@@ -82,7 +82,7 @@ stages:
           
           - task: Npm@1
             inputs:
-              command: 'ci'
+              command: 'install'
               workingDir: '../'
               customRegistry: 'useFeed'
               customFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
