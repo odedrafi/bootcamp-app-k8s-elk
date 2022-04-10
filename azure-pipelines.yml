@@ -82,7 +82,7 @@ stages:
           
           - task: Npm@1
             inputs:
-              command: 'install'
+              command: 'ci'
               workingDir: '../'
               customRegistry: 'useFeed'
               customFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
@@ -97,7 +97,8 @@ stages:
           #   inputs:
           #     targetPath: '$(Pipeline.Workspace)'
           #     artifact: 'arti'
-          #     # publishLocation: 'pipeline'
+          #     publishLocation: 'pipeline'
+          
           - task: UniversalPackages@0
             inputs:
               command: 'publish'
