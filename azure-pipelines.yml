@@ -43,7 +43,7 @@ stages:
                    PGPASSWORD=$(pg_password)
                    PGPORT=5432" > .env
           - script: |
-              echo "az devops login --organization https://dev.azure.com/odedrafi35/
+               az devops login --organization https://dev.azure.com/odedrafi35/
 
                      az artifacts universal download
                       --organization https://dev.azure.com/odedrafi35/
@@ -59,7 +59,7 @@ stages:
                       --name my-first-package
                       --version 0.0.1
                       --description "Welcome to Universal Packages"
-                      --path .> ".npmrc
+                      --path .
             displayName: "Create & update .npmrc file To connect to azure artifacts"
           
           - task: Bash@3
