@@ -45,13 +45,21 @@ stages:
           - script: |
               echo "az devops login --organization https://dev.azure.com/odedrafi35/
 
-                     az artifacts universal publish
+                     az artifacts universal download
                       --organization https://dev.azure.com/odedrafi35/
                       --feed feed1
                       --name artifact
-                      --version 0.0.1$(Rev:r)
+                      --version 0.0.1
                       --description "Welcome to Universal Packages"
-                      --path .. " > .npmrc
+                      --path . 
+
+                      az artifacts universal publish
+                      --organization https://dev.azure.com/odedrafi35/
+                      --feed feed1
+                      --name my-first-package
+                      --version 0.0.1
+                      --description "Welcome to Universal Packages"
+                      --path .> ".npmrc
             displayName: "Create & update .npmrc file To connect to azure artifacts"
           
           - task: Bash@3
