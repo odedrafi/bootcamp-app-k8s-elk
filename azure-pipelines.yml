@@ -109,16 +109,17 @@ stages:
           - task: PublishBuildArtifacts@1
             inputs:
                pathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
-               artifactName: 'app-artifact'
+               artifactName: 'artifact'
             displayName: 'Publish Artifact'
           - task: UniversalPackages@0
             inputs:
               command: 'publish'
-              publishDirectory: '$(Build.ArtifactStagingDirectory)'
+              publishDirectory: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)'
               feedsToUsePublish: 'internal'
               vstsFeedPublish: 'feed1'
-              vstsFeedPackagePublish: 'arti2.0.0'
+              vstsFeedPackagePublish: 'artifact'
               versionOption: 'patch'
+              packagePublishDescription: 'publish the zip into azure artifact'
 
   - stage: DeployStaging
     jobs:
