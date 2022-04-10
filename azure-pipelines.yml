@@ -37,7 +37,7 @@ stages:
           - task: PublishPipelineArtifact@1
             inputs:
               targetPath: '$(Pipeline.Workspace)'
-              artifact: 'arti$(Build.BuildId)$(Rev:.r)'
+              artifact: 'arti$(Build.BuildId)'
               publishLocation: 'pipeline'
               
           - task: UniversalPackages@0
