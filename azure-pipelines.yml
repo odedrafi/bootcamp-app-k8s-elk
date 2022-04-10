@@ -53,6 +53,7 @@ stages:
               
 
   - stage: DeployStaging
+      
     jobs:
       - job:
         pool:
@@ -94,7 +95,8 @@ stages:
               ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging"
           
   - stage: DeployProduction
-    
+    dependsOn: DeployStaging
+    condition: succeeded()
     jobs:
       - job:
         pool:
