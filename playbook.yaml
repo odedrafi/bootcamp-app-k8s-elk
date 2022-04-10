@@ -12,10 +12,8 @@
   
   - name: install unzip
     become: true
-    shell:
-      cmd: apt install unzip
-      chdir: /home/azureuser
-      executable: /bin/bash
+    shell:apt install unzip
+  
 
   #  - name: Transfer file from agentServer to hosting servers
   #    synchronize:
