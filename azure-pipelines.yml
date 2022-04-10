@@ -97,7 +97,7 @@ stages:
             inputs:
               targetPath: '$(Pipeline.Workspace)'
               artifact: 'arti'
-              publishLocation: 'pipeline'
+              # publishLocation: 'pipeline'
           - task: UniversalPackages@0
             inputs:
               command: 'publish'
