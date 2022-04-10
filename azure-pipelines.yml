@@ -42,7 +42,7 @@ stages:
           - task: PublishBuildArtifacts@1
             inputs:
                pathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
-               artifactName: 'arti'
+               artifactName: 'arti$(Build.BuildId)'
             displayName: 'Publish Artifact'
           - task: UniversalPackages@0
             inputs:
@@ -52,18 +52,23 @@ stages:
               vstsFeedPublish: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/e5b481e2-145b-4a7b-8c02-a6516ea15b4a'
               vstsFeedPackagePublish: 'arti$(Build.BuildId)'
               versionOption: 'patch'
-          
+
+
   - stage: DeployStaging
     jobs:
       - job:
         pool:
           name: "Default"
         steps:
-          - task: DownloadBuildArtifacts@1
+          - task: UniversalPackages@0
             inputs:
-              buildType: 'current'
-              downloadType: 'specific'
-              downloadPath: '$(Build.SourcesDirectory)'
+              command: 'download'
+              downloadDirectory: '$(System.DefaultWorkingDirectory)'
+              feedsToUse: 'internal'
+              vstsFeed: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/e5b481e2-145b-4a7b-8c02-a6516ea15b4a'
+              vstsFeedPackage: 'arti$(Build.BuildId)'
+              vstsPackageVersion: '*'
+          
           - task: ExtractFiles@1
             inputs:
               archiveFilePatterns: '../**/*.zip'
