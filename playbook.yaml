@@ -9,11 +9,29 @@
      update_cache: yes
      force_apt_get: yes
      cache_valid_time: 3600
+  
+  - name: install unzip
+    shell:
+      cmd: sudo apt install unzip
+      chdir: /home/azureuser
+      executable: /bin/bash
 
+  #  - name: Transfer file from agentServer to hosting servers
+  #    synchronize:
+  #      src: /home/azureuser/myagent/_work/1/a/app-artifact/bootcamp.zip
+  #      dest: /home/azureuser/
   - name: Transfer folder from agentServer to hosting servers
     synchronize:
-      src: /home/adminuser/myagent/_work/1/s/
+      src: /home/adminuser/myagent/_work/1/a/bootcamp.zip
       dest: /home/adminuser/bootcamp-app
+  - name: Unarchive a file that is already on the remote machine
+    unarchive:
+      src: /home/azureuser/bootcamp.zip
+      dest: /home/azureuser/
+      remote_src: yes
+
+  
+
   - name: Transfer file from agentServer to hosting servers
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/.env
