@@ -93,18 +93,18 @@ stages:
               archiveType: 'zip'
               archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
               replaceExistingArchive: true
-          - task: PublishPipelineArtifact@1
-            inputs:
-              targetPath: '$(Pipeline.Workspace)'
-              artifact: 'arti'
-              # publishLocation: 'pipeline'
+          # - task: PublishPipelineArtifact@1
+          #   inputs:
+          #     targetPath: '$(Pipeline.Workspace)'
+          #     artifact: 'arti'
+          #     # publishLocation: 'pipeline'
           - task: UniversalPackages@0
             inputs:
               command: 'publish'
               publishDirectory: '$(Build.ArtifactStagingDirectory)'
               feedsToUsePublish: 'internal'
               vstsFeedPublish: '83c24fb4-387d-49b2-a813-98c9283e4af6'
-              vstsFeedPackagePublish: 'artifact'
+              vstsFeedPackagePublish: 'arti2.0.0'
               versionOption: 'patch'
 
   - stage: DeployStaging
