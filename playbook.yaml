@@ -12,7 +12,7 @@
   
   - name: install unzip
     become: true
-    shell:apt install unzip
+    shell: apt install unzip
   
 
   #  - name: Transfer file from agentServer to hosting servers
@@ -35,6 +35,7 @@
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/.env
       dest: /home/adminuser/bootcamp-app
+  
   - name: Database initialization
     shell: npm run initdb
     async: 30
