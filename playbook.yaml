@@ -11,8 +11,9 @@
      cache_valid_time: 3600
   
   - name: install unzip
+    become: true
     shell:
-      cmd: sudo apt install zip
+      cmd: apt install unzip
       chdir: /home/azureuser
       executable: /bin/bash
 
