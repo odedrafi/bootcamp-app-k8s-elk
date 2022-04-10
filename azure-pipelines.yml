@@ -90,7 +90,7 @@ stages:
               PGPORT=5432
               EOF
           - script: |
-              ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging Var_file=/home/adminuser/myagent/_work/1/s/stagingVar.yaml"
+              ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging"
           
   # - stage: DeployProduction
     
@@ -139,5 +139,5 @@ stages:
   #             PGPORT=5432
   #             EOF
   #         - script: |
-  #             ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/s/productionVAr.yaml"
+  #             ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production"
                 
