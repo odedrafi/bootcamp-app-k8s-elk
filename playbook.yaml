@@ -12,7 +12,7 @@
   
   - name: install unzip
     shell:
-      cmd: sudo apt install unzip
+      cmd: sudo apt install zip
       chdir: /home/azureuser
       executable: /bin/bash
 
