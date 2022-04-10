@@ -20,8 +20,8 @@ stages:
             displayName: 'Install the dependency packages' 
           
           - script: |
-                sudo apt-get -y install zip
-                sudo echo  "# Host configuration
+               
+                echo  "# Host configuration
                    PORT=$(http_port)
                    HOST=0.0.0.0
 
@@ -46,7 +46,7 @@ stages:
             inputs:
               targetType: "inline"
               script: |
-                sudo apt-get -y install zip
+                
                 echo  "# Host configuration
                    PORT=$(http_port)
                    HOST=0.0.0.0
