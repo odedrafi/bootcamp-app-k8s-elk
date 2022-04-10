@@ -20,14 +20,6 @@ stages:
               sudo apt npm install
               sudo apt install zip
             displayName: 'Install the dependency packages' 
-          
-          
-          # - script: |
-          #      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-          # - script: |
-          #      az config set extension.use_dynamic_install=yes_without_prompt
-          # - script: |
-          #      AZURE_DEVOPS_EXT_PAT=$(Pat) az artifacts universal publish    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact$(Build.BuildId)    --version 0.0.1    --description "Welcome to Universal Packages"    --path .
           - task: ArchiveFiles@2
             inputs:
               rootFolderOrFile: '$(Build.BinariesDirectory)'
@@ -43,7 +35,6 @@ stages:
               
           - task: UniversalPackages@0
             inputs:
-              
               command: 'publish'
               publishDirectory: '$(Build.ArtifactStagingDirectory)'
               feedsToUsePublish: 'internal'
