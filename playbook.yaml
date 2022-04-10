@@ -10,17 +10,7 @@
      force_apt_get: yes
      cache_valid_time: 3600
   
-  - name: install unzip
-    become: true
-    shell: apt install unzip
-
-  - nam: npm $ nodejs
-    become: true
-    shell: sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs           
-  
-  - name: install dotenv
-    become: true
-    shell: npm install dotenv      
+    
       
   - name: Transfer folder from agentServer to hosting servers
     synchronize:
@@ -31,7 +21,17 @@
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/.env
       dest: /home/adminuser/
+  - name: install unzip
+    become: true
+    shell: apt install unzip
+
+  - nam: npm $ nodejs
+    become: true
+    shell: sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs           
   
+  - name: install dotenv
+    become: true
+    shell: npm install dotenv    
   - name: Database initialization
     shell: npm run initdb
     async: 30
