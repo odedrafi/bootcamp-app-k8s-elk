@@ -1,1 +1,11 @@
-env: .env
+http_port: {your http_port}
+public_ip: {lb public_ip}
+
+deploy_directory: {your deploy_directory}
+pg_host: {your pg_host}
+pg_username: {your pg_username}
+pg_database: {your pg_database}
+pg_password: {your pg_password}
+okta_org_url: {your okta_org_url}
+okta_client_id: {your okta_client_id}
+okta_client_secret: {your okta_client_secret}
