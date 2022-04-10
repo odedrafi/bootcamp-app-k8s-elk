@@ -87,7 +87,7 @@ stages:
               OKTA_CLIENT_ID= $(okta_client_id)
               OKTA_CLIENT_SECRET= $(okta_client_secret)
               # Postgres
-              PGHOST $(pg_host)
+              PGHOST=$(pg_host)
               PGUSERNAME=$(pg_username)
               PGDATABASE=$(pg_database)
               PGPASSWORD=$(pg_password)
@@ -136,7 +136,7 @@ stages:
               OKTA_CLIENT_ID= $(okta_client_id)
               OKTA_CLIENT_SECRET= $(okta_client_secret)
               # Postgres
-              PGHOST $(production_host)
+              PGHOST=$(production_host)
               PGUSERNAME=$(pg_username)
               PGDATABASE=$(pg_database)
               PGPASSWORD=$(pg_password)
