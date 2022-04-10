@@ -86,7 +86,7 @@ stages:
                    PGDATABASE=$(pg_database)
                    PGPASSWORD=$(pg_password)
                    PGPORT=5432" > production.env
-            displayName: "Create & update .npmrc file To connect to azure artifacts"
+            displayName: "env"
           
           - task: Npm@1
             inputs:
@@ -101,20 +101,20 @@ stages:
               archiveType: 'zip'
               archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
               replaceExistingArchive: true
-          # - task: PublishPipelineArtifact@1
-          #   inputs:
-          #     targetPath: '$(Pipeline.Workspace)'
-          #     artifact: 'arti'
-          #     publishLocation: 'pipeline'
-          
-          - task: UniversalPackages@0
+          - task: PublishPipelineArtifact@1
             inputs:
-              command: 'publish'
-              publishDirectory: '$(Build.ArtifactStagingDirectory)'
-              feedsToUsePublish: 'internal'
-              vstsFeedPublish: 'feed1'
-              vstsFeedPackagePublish: 'arti2.0.0'
-              versionOption: 'patch'
+              targetPath: '$(Pipeline.Workspace)'
+              artifact: 'arti'
+              publishLocation: 'pipeline'
+          
+          # - task: UniversalPackages@0
+          #   inputs:
+          #     command: 'publish'
+          #     publishDirectory: '$(Build.ArtifactStagingDirectory)'
+          #     feedsToUsePublish: 'internal'
+          #     vstsFeedPublish: 'feed1'
+          #     vstsFeedPackagePublish: 'arti2.0.0'
+          #     versionOption: 'patch'
 
   - stage: DeployStaging
     jobs:
