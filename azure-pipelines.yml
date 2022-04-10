@@ -32,7 +32,7 @@ stages:
               rootFolderOrFile: '$(Build.BinariesDirectory)'
               includeRootFolder: true
               archiveType: 'zip'
-              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/bootcamp-app.zip'
               replaceExistingArchive: true
           - task: PublishPipelineArtifact@1
             inputs:
@@ -57,14 +57,20 @@ stages:
         pool:
           name: "Default"
         steps:
-          - task: UniversalPackages@0
+          - task: DownloadBuildArtifacts@0
             inputs:
-              command: 'download'
-              downloadDirectory: '$(System.DefaultWorkingDirectory)'
-              feedsToUse: 'internal'
-              vstsFeed: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/e5b481e2-145b-4a7b-8c02-a6516ea15b4a'
-              vstsFeedPackage: 'arti$(Build.BuildId)'
-              vstsPackageVersion: '*'
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'arti$(Build.BuildId)'
+              downloadPath: '$(System.ArtifactsDirectory)'
+          # - task: UniversalPackages@0
+          #   inputs:
+          #     command: 'download'
+          #     downloadDirectory: '$(System.DefaultWorkingDirectory)'
+          #     feedsToUse: 'internal'
+          #     vstsFeed: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/e5b481e2-145b-4a7b-8c02-a6516ea15b4a'
+          #     vstsFeedPackage: 'arti$(Build.BuildId)'
+          #     vstsPackageVersion: '*'
           
           - task: ExtractFiles@1
             inputs:
