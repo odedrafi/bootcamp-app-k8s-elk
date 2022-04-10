@@ -21,7 +21,7 @@
   #      dest: /home/azureuser/
   - name: Transfer folder from agentServer to hosting servers
     synchronize:
-      src: /home/adminuser/myagent/_work/1/a/bootcamp.zip
+      src: /home/adminuser/myagent/_work/1/a/
       dest: /home/adminuser/bootcamp-app
   - name: Unarchive a file that is already on the remote machine
     unarchive:
