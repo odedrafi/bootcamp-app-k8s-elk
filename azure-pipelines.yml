@@ -1,14 +1,14 @@
 name: build_$(Date:yyyyMMdd)$(Rev:r)
  
-# trigger:
-#   - master
+trigger:
+  - master
 
 
 
 stages:
   
   - stage: build
-    jobs:
+    jobs: 
       - job: build_on_linux
         pool:
           name: "Default"
@@ -19,17 +19,13 @@ stages:
               sudo apt-get install -y nodejs
             displayName: 'Install the dependency packages' 
           
-          - task: Bash@3
-            inputs:
-              targetType: "inline"
           
-          - script: |
-               curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          # - script: |
+          #      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
           # - script: |
           #      az config set extension.use_dynamic_install=yes_without_prompt
-          - script: |
-               AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal publish    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact$(Build.BuildId)    --version 0.0.1    --description "Welcome to Universal Packages"    --path . 
-                          
+          # - script: |
+          #      AZURE_DEVOPS_EXT_PAT=$(Pat) az artifacts universal publish    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact$(Build.BuildId)    --version 0.0.1    --description "Welcome to Universal Packages"    --path .
           - task: ArchiveFiles@2
             inputs:
               rootFolderOrFile: '$(Build.BinariesDirectory)'
@@ -45,9 +41,9 @@ stages:
           - task: PublishBuildArtifacts@1
             inputs:
                pathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
-               artifactName: 'artifact'
+               artifactName: 'arti'
             displayName: 'Publish Artifact'
-
+          
           
   - stage: DeployStaging
     jobs:
@@ -60,14 +56,6 @@ stages:
               buildType: 'current'
               downloadType: 'specific'
               downloadPath: '$(System.ArtifactsDirectory)'
-
-          # - task: UniversalPackages@0
-          #   inputs:
-          #     command: 'download'
-          #     downloadDirectory: '$(System.DefaultWorkingDirectory)'
-          #     feedsToUse: 'internal'
-          #     vstsFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
-          #     vstsPackageVersion: '*.*.*'
           - task: ExtractFiles@1
             inputs:
               archiveFilePatterns: '../**/*.zip'
@@ -96,52 +84,52 @@ stages:
           - script: |
               ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging Var_file=/home/adminuser/myagent/_work/1/s/stagingVar.yaml"
           
-  - stage: DeployProduction
+  # - stage: DeployProduction
     
-    jobs:
-      - job:
-        pool:
-          name: "production"
-        steps:
-          - script: |
-              az config set extension.use_dynamic_install=yes_without_prompt  
-          - script: |
-              curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash         
-          - script: |
-               AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal download    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact$(Build.BuildId)    --version 0.0.1$(Rev:r)       --path .
+  #   jobs:
+  #     - job:
+  #       pool:
+  #         name: "production"
+  #       steps:
+  #         - script: |
+  #             az config set extension.use_dynamic_install=yes_without_prompt  
+  #         - script: |
+  #             curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash         
+  #         - script: |
+  #              AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal download    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact$(Build.BuildId)    --version 0.0.1$(Rev:r)       --path .
              
 
-          - task: DownloadBuildArtifacts@1
-            inputs:
-              buildType: 'current'
-              downloadType: 'specific'
-              downloadPath: '$(System.ArtifactsDirectory)'
-          - task: ExtractFiles@1
-            inputs:
-              archiveFilePatterns: '../**/*.zip'
-              destinationFolder: 'bootcamp-app'
-              cleanDestinationFolder: true
-              overwriteExistingFiles: false
+  #         - task: DownloadBuildArtifacts@1
+  #           inputs:
+  #             buildType: 'current'
+  #             downloadType: 'specific'
+  #             downloadPath: '$(System.ArtifactsDirectory)'
+  #         - task: ExtractFiles@1
+  #           inputs:
+  #             archiveFilePatterns: '../**/*.zip'
+  #             destinationFolder: 'bootcamp-app'
+  #             cleanDestinationFolder: true
+  #             overwriteExistingFiles: false
               
-          - script: |
-              cat  << EOF > .env
-              # Host configuration
-              PORT= $(http_port)
-              HOST=0.0.0.0
-              HOST_URL=http://$(production_public_ip):$(http_port)
-              COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
-              NODE_ENV=development
-              # Okta configuration
-              OKTA_ORG_URL=https://$(okta_org_url)
-              OKTA_CLIENT_ID= $(okta_client_id)
-              OKTA_CLIENT_SECRET= $(okta_client_secret)
-              # Postgres
-              PGHOST=$(production_host)
-              PGUSERNAME=$(pg_username)
-              PGDATABASE=$(pg_database)
-              PGPASSWORD=$(pg_password)
-              PGPORT=5432
-              EOF
-          - script: |
-              ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/s/productionVAr.yaml"
+  #         - script: |
+  #             cat  << EOF > .env
+  #             # Host configuration
+  #             PORT= $(http_port)
+  #             HOST=0.0.0.0
+  #             HOST_URL=http://$(production_public_ip):$(http_port)
+  #             COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+  #             NODE_ENV=development
+  #             # Okta configuration
+  #             OKTA_ORG_URL=https://$(okta_org_url)
+  #             OKTA_CLIENT_ID= $(okta_client_id)
+  #             OKTA_CLIENT_SECRET= $(okta_client_secret)
+  #             # Postgres
+  #             PGHOST=$(production_host)
+  #             PGUSERNAME=$(pg_username)
+  #             PGDATABASE=$(pg_database)
+  #             PGPASSWORD=$(pg_password)
+  #             PGPORT=5432
+  #             EOF
+  #         - script: |
+  #             ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/s/productionVAr.yaml"
                 
