@@ -21,7 +21,7 @@ stages:
           
           - script: |
                
-                touch  "# Host configuration
+                echo  "# Host configuration
                    PORT=$(http_port)
                    HOST=0.0.0.0
 
