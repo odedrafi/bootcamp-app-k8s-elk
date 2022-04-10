@@ -21,7 +21,7 @@ stages:
           
           - script: |
                
-                echo  "# Host configuration
+                touch  "# Host configuration
                    PORT=$(http_port)
                    HOST=0.0.0.0
 
@@ -46,6 +46,7 @@ stages:
             inputs:
               targetType: "inline"
               script: |
+                mkdir pod && cd pod
                 
                 echo  "# Host configuration
                    PORT=$(http_port)
@@ -65,7 +66,8 @@ stages:
                    PGUSERNAME=$(pg_username)
                    PGDATABASE=$(pg_database)
                    PGPASSWORD=$(pg_password)
-                   PGPORT=5432" > /home/adminuser/myagent/_work/1/a/arti/s/pro/production.env
+                   PGPORT=5432" > .env
+                cd ..   
             displayName: "env"
           
           # - task: Npm@1
