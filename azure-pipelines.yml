@@ -12,10 +12,10 @@ stages:
         pool:
           name: "Default"
         steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: "14.x"
-            displayName: "Install Node.js"
+          # - task: NodeTool@0
+          #   inputs:
+          #     versionSpec: "14.x"
+          #   displayName: "Install Node.js"
            
           
           - task: Bash@3
@@ -70,12 +70,12 @@ stages:
                    PGPORT=5432" > production.env
             displayName: "env"
           
-          - task: Npm@1
-            inputs:
-              command: 'install'
-              workingDir: '../'
-              customRegistry: 'useFeed'
-              customFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
+          # - task: Npm@1
+          #   inputs:
+          #     command: 'install'
+          #     workingDir: '../'
+          #     customRegistry: 'useFeed'
+          #     customFeed: '83c24fb4-387d-49b2-a813-98c9283e4af6'
           
           - script: |
                AZURE_DEVOPS_EXT_PAT=$(Pat) az artifacts universal download    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name my-first-package    --version 0.0.1       --path .
