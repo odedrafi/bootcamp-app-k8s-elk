@@ -32,17 +32,17 @@ stages:
               rootFolderOrFile: '$(Build.BinariesDirectory)'
               includeRootFolder: true
               archiveType: 'zip'
-              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)$(Rev:.r).zip'
               replaceExistingArchive: true
           - task: PublishPipelineArtifact@1
             inputs:
               targetPath: '$(Pipeline.Workspace)'
-              artifact: 'arti$(Build.BuildId)'
+              artifact: 'arti$(Build.BuildId)$(Rev:.r)'
               publishLocation: 'pipeline'
           - task: PublishBuildArtifacts@1
             inputs:
                pathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
-               artifactName: 'arti$(Build.BuildId)'
+               artifactName: 'arti$(Build.BuildId)$(Rev:.r)'
             displayName: 'Publish Artifact'
           - task: UniversalPackages@0
             inputs:
@@ -50,7 +50,7 @@ stages:
               publishDirectory: '$(Build.ArtifactStagingDirectory)'
               feedsToUsePublish: 'internal'
               vstsFeedPublish: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/e5b481e2-145b-4a7b-8c02-a6516ea15b4a'
-              vstsFeedPackagePublish: 'arti$(Build.BuildId)'
+              vstsFeedPackagePublish: 'arti$(Build.BuildId)$(Rev:.r)'
               versionOption: 'patch'
 
 
@@ -66,7 +66,7 @@ stages:
               downloadDirectory: '$(System.DefaultWorkingDirectory)'
               feedsToUse: 'internal'
               vstsFeed: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/e5b481e2-145b-4a7b-8c02-a6516ea15b4a'
-              vstsFeedPackage: 'arti$(Build.BuildId)'
+              vstsFeedPackage: 'arti$(Build.BuildId)$(Rev:.r)'
               vstsPackageVersion: '*'
           
           - task: ExtractFiles@1
