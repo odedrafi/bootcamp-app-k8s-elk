@@ -42,24 +42,24 @@ stages:
                    PGDATABASE=$(pg_database)
                    PGPASSWORD=$(pg_password)
                    PGPORT=5432" > .env
-          - script: |
-               az devops login --organization https://dev.azure.com/odedrafi35/
+          # - script: |
+          #      az devops login --organization https://dev.azure.com/odedrafi35/
 
-                     az artifacts universal download
-                      --organization https://dev.azure.com/odedrafi35/
-                      --feed feed1
-                      --name artifact
-                      --version 0.0.1
-                      --description "Welcome to Universal Packages"
-                      --path . 
+          #            az artifacts universal download
+          #             --organization https://dev.azure.com/odedrafi35/
+          #             --feed feed1
+          #             --name artifact
+          #             --version 0.0.1
+          #             --description "Welcome to Universal Packages"
+          #             --path . 
 
-                      az artifacts universal publish
-                      --organization https://dev.azure.com/odedrafi35/
-                      --feed feed1
-                      --name my-first-package
-                      --version 0.0.1
-                      --description "Welcome to Universal Packages"
-                      --path .
+          #             az artifacts universal publish
+          #             --organization https://dev.azure.com/odedrafi35/
+          #             --feed feed1
+          #             --name my-first-package
+          #             --version 0.0.1
+          #             --description "Welcome to Universal Packages"
+          #             --path .
             displayName: "Create & update .npmrc file To connect to azure artifacts"
           
           - task: Bash@3
