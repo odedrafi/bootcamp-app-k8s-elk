@@ -1,4 +1,16 @@
 # Node.js Weight Tracker
+![This is an image](ci_cd-pipeline.png)
+
+# Description
+- This repository holds a nodejs app with some yaml files
+ > playbook.yaml -> the play that ansible will orchestrate
+ > azure-pipelines.yaml -> the yaml code for ci\cd 
+ > stagingVar.yaml && productionVAr.yaml -> ansible var files 
+ > inventory.ini -> Staging hosts list
+ > ProductionInventory.ini -> Production hosts list
+
+To run the ci - cd pipeline copy repository to azure devops or sync between them 
+ and run pipeline
 
 ![Demo](docs/build-weight-tracker-app-demo.gif)
 
