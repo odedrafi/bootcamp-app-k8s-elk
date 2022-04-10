@@ -17,6 +17,7 @@ stages:
               sudo apt-get update
               sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
               sudo apt-get install -y nodejs
+              sudo apt npm install
               sudo apt install zip
             displayName: 'Install the dependency packages' 
           
@@ -107,14 +108,6 @@ stages:
   #       pool:
   #         name: "production"
   #       steps:
-  #         - script: |
-  #             az config set extension.use_dynamic_install=yes_without_prompt  
-  #         - script: |
-  #             curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash         
-  #         - script: |
-  #              AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal download    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact$(Build.BuildId)    --version 0.0.1$(Rev:r)       --path .
-             
-
   #         - task: DownloadBuildArtifacts@1
   #           inputs:
   #             buildType: 'current'
