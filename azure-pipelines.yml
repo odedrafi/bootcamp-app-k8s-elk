@@ -49,7 +49,7 @@ stages:
     jobs:
       - job:
         pool:
-          name: "Defualt"
+          name: "Default"
         steps:
           - task: DownloadBuildArtifacts@0
             inputs:
