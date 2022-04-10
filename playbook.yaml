@@ -37,7 +37,7 @@
   - name: Transfer file from agentServer to hosting servers
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/.env
-      dest: /home/adminuser/bootcamp-app
+      dest: /home/adminuser/
   
   - name: Database initialization
     shell: npm run initdb
