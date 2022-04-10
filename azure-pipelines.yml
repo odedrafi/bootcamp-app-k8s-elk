@@ -122,21 +122,25 @@ stages:
   - stage: DeployProduction
     
     jobs:
-      - job:
-        pool:
-          name: "production"
-        steps:
-          - task: DownloadBuildArtifacts@1
-            inputs:
-              buildType: 'current'
-              downloadType: 'specific'
-              downloadPath: '$(System.ArtifactsDirectory)'
-          - task: ExtractFiles@1
-            inputs:
-              archiveFilePatterns: '../**/*.zip'
-              destinationFolder: 'bootcamp-app'
-              cleanDestinationFolder: true
-              overwriteExistingFiles: false
-          - script: |
-              ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/a/arti/s/productionVAr.yaml"
-          
+    - deployment: 'DeployToProduction'
+      environment: 'production'
+      strategy:
+          runOnce:
+            deploy:  
+              pool:
+                name: "production"
+              steps:
+                - task: DownloadBuildArtifacts@1
+                  inputs:
+                    buildType: 'current'
+                    downloadType: 'specific'
+                    downloadPath: '$(System.ArtifactsDirectory)'
+                - task: ExtractFiles@1
+                  inputs:
+                    archiveFilePatterns: '../**/*.zip'
+                    destinationFolder: 'bootcamp-app'
+                    cleanDestinationFolder: true
+                    overwriteExistingFiles: false
+                - script: |
+                    ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production Var_file=/home/adminuser/myagent/_work/1/a/arti/s/productionVAr.yaml"
+                
