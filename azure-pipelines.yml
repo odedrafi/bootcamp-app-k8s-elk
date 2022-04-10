@@ -116,7 +116,7 @@ stages:
               command: 'publish'
               publishDirectory: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)'
               feedsToUsePublish: 'internal'
-              vstsFeedPublish: 'odedrafi35'
+              vstsFeedPublish: 'feed1'
               vstsFeedPackagePublish: 'artifact'
               versionOption: 'patch'
               packagePublishDescription: 'publish the zip into azure artifact'
