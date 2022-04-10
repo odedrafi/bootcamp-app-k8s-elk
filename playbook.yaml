@@ -20,7 +20,7 @@
                                                    
   - name: Transfer file .env agentServer to hosting servers
     synchronize:
-      src: /home/adminuser/myagent/_work/1/a/arti/s/{{ env }} 
+      src: /home/adminuser/myagent/_work/1/s/{{ env }} 
       dest: /home/adminuser/bootcamp-app/.env
 
   - name: Update nodejs package
