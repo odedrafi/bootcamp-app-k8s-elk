@@ -1,3 +1,6 @@
+- group: bootcamp-appBuildVar
+
+
 http_port: $(http_port)
 public_ip: $(production_public_ip)
 
