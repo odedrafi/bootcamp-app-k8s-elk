@@ -9,13 +9,17 @@
      update_cache: yes
      force_apt_get: yes
      cache_valid_time: 3600
-  
+  - name: Transfer folder from agentServer to hosting servers
+    synchronize:
+      src: /home/adminuser/myagent/_work/1/s/package.json
+      dest: /home/adminuser/bootcamp-app  
     
+      
       
   - name: Transfer folder from agentServer to hosting servers
     synchronize:
       src: /home/adminuser/myagent/_work/1/s/
-      dest: /home/adminuser/bootcamp-app
+      dest: /home/adminuser/bootcamp-app/
 
   - name: Transfer file from agentServer to hosting servers
     synchronize:
