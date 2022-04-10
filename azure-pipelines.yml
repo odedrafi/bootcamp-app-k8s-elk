@@ -6,24 +6,22 @@ trigger:
 
 
 stages:
+  
   - stage: build
     jobs:
       - job: build_on_linux
         pool:
           name: "Default"
         steps:
-          # - task: NodeTool@0
-          #   inputs:
-          #     versionSpec: "14.x"
-          #   displayName: "Install Node.js"
-           
+          - script: |
+              sudo apt-get update
+              sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+            displayName: 'Install the dependency packages' 
           
-          - task: Bash@3
-            inputs:
-              targetType: "inline"
-              script: |
+          - script: |
                 sudo apt-get -y install zip
-                echo  "# Host configuration
+                sudo echo  "# Host configuration
                    PORT=$(http_port)
                    HOST=0.0.0.0
 
