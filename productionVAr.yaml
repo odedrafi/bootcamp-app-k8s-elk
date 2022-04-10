@@ -1,11 +1,11 @@
-http_port: {your http_port}
-public_ip: {lb public_ip}
+http_port: $(http_port)
+public_ip: $(production_public_ip)
 
-deploy_directory: {your deploy_directory}
-pg_host: {your pg_host}
-pg_username: {your pg_username}
-pg_database: {your pg_database}
-pg_password: {your pg_password}
-okta_org_url: {your okta_org_url}
-okta_client_id: {your okta_client_id}
-okta_client_secret: {your okta_client_secret}
+deploy_directory: $(deploy_directory)
+pg_host: $(production_host)
+pg_username: $(pg_username)
+pg_database: $(pg_database)
+pg_password: $(pg_password)
+okta_org_url: $(okta_org_url)
+okta_client_id: $(okta_client_id)
+okta_client_secret: $(okta_client_secret)
