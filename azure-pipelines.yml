@@ -80,7 +80,7 @@ stages:
           # - script: |
           #      az config set extension.use_dynamic_install=yes_without_prompt
           - script: |
-               AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal publish    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifactbuild_$(Rev:r)    --version 0.0.1    --description "Welcome to Universal Packages"    --path .
+               AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal publish    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifactbuild_$(rev:r)    --version 0.0.1    --description "Welcome to Universal Packages"    --path .
                      
           # - script: |
           #      AZURE_DEVOPS_EXT_PAT=gr4325yts5yixqlkglpjjjffex4hwiyk4en5nzvoo4kwanzdemfq az artifacts universal download    --organization https://dev.azure.com/odedrafi35/    --feed feed1    --name artifact    --version 0.0.1$(Rev:r)       --path .
