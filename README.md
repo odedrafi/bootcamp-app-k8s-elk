@@ -1,47 +1,42 @@
 # Node.js Weight Tracker
+
 ![This is an image](ci_cd-pipeline.png)
 
 # Description
-- This repository holds a nodejs app with some yaml files
 
- > playbook.yaml -> the play that ansible will orchestrate
+hi!! have you ever wanted to integrate your nodejs app on a CI\CD with azure devops?. this is the place for you !
+in here we will try to explain the steps to take inorder to make it work!
 
- > azure-pipelines.yaml -> the yaml code for ci\cd 
+this project is part of bottcamp in sela
 
- > stagingVar.yaml && productionVAr.yaml -> ansible var files 
+# ci\cd illustration
 
- > inventory.ini -> Staging hosts list
- 
- > ProductionInventory.ini -> Production hosts list
+![This is an image](project-cicd.png)
 
-To run the ci - cd pipeline copy repository to azure devops or sync between them 
- and run pipeline
+## Deployment
+
+<span style="color:red">**This project dosn't yet containe a ci\cd pipeline for infrastructureso it will have to be deployd manually.**</span>
+
+### Create an azure devops project:
+
+In the azure devops UI we can intigrate everything we need for the project .
+
+> here are the steps demonstrated in this pproject
+
+- import your app repo to Azure Repo
+  > for the purpose of this exersize will need to add
+  > a playbook.yaml for cd deployment with ansible
+- Go to Azure Pipelines tab and start a new pipeline using a multi staged yaml file
+- Will run a simple dependacies installation and archive our solution as an artifact and Publish it(save it) to Azure artifacts
+
+---
 
 ![Demo](docs/build-weight-tracker-app-demo.gif)
 
-This sample application demonstrates the following technologies.
+---
 
-* [hapi](https://hapi.dev) - a wonderful Node.js application framework
-* [PostgreSQL](https://www.postgresql.org/) - a popular relational database
-* [Postgres](https://github.com/porsager/postgres) - a new PostgreSQL client for Node.js
-* [Vue.js](https://vuejs.org/) - a popular front-end library
-* [Bulma](https://bulma.io/) - a great CSS framework based on Flexbox
-* [EJS](https://ejs.co/) - a great template library for server-side HTML templates
+https://gitlab.com/ansible-workshop/labs/lab06
 
-**Requirements:**
 
-* [Node.js](https://nodejs.org/) 14.x
-* [PostgreSQL](https://www.postgresql.org/) (can be installed locally using Docker)
-* [Free Okta developer account](https://developer.okta.com/) for account registration, login
 
-## Install and Configuration
-
-1. Clone or download source files
-1. Run `npm install` to install dependencies
-1. If you don't already have PostgreSQL, set up using Docker
-1. Create a [free Okta developer account](https://developer.okta.com/) and add a web application for this app
-1. Copy `.env.sample` to `.env` and change the `OKTA_*` values to your application
-1. Initialize the PostgreSQL database by running `npm run initdb`
-1. Run `npm run dev` to start Node.js
-
-The associated blog post goes into more detail on how to set up PostgreSQL with Docker and how to configure your Okta account.
+# This readme to be continued!!
