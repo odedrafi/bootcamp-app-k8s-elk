@@ -1,25 +1,25 @@
-# CI/CD Pipeline
+# <font color=#728FCE>CI/CD Pipeline</font>
 
 ![This is an image](images/ci_cd-pipeline.png)
 
 [![Build Status](https://dev.azure.com/odedrafi35/bootcamp-app/_apis/build/status/bootcamp-app?branchName=master)](https://dev.azure.com/odedrafi35/bootcamp-app/_build/latest?definitionId=7&branchName=master) [![arti315 package in Feed_Good@Local feed in Azure Artifacts](https://feeds.dev.azure.com/odedrafi35/4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/_apis/public/Packaging/Feeds/Feed_Good@Local/Packages/77bc383b-cc35-4f74-a078-9b893b7e4f86/Badge)](https://dev.azure.com/odedrafi35/bootcamp-app/_artifacts/feed/Feed_Good@Local/UPack/arti315/0.0.1)
 
-# Description
+# <font color=#728FCE>Description</font>
 
 hi!! have you ever wanted to integrate your nodejs app on a CI\CD with azure devops?. this is the place for you !
 in here we will try to explain the steps to take inorder to make it work!
 
 this project is part of bottcamp in sela
 
-# ci\cd illustration
+<font color=#728FCE>ci\cd illustration</font>
 
 ![This is an image](images/project-cicd.png)
 
-## Deployment
+## <font color=#728FCE>Deployment</font>
 
 <span style="color:red">**This project dosn't yet containe a ci\cd pipeline for infrastructureso it will have to be deployd manually.**</span>
 
-### Create an azure devops project:
+### <font color=#728FCE>Create an azure devops project:</font>
 
 In the azure devops UI we can intigrate everything we need for the project .
 
@@ -40,19 +40,19 @@ In the azure devops UI we can intigrate everything we need for the project .
 
 ---
 
-### Demo
+### <font color=#728FCE>Demo</font>
 
 ![Demo](docs/build-weight-tracker-app-demo.gif)
 
 ---
 
-### expected resultes
+### <font color=#728FCE>expected resultes</font>
 
 ![expected_results image](images/expected_results.jpg)
 
 ---
 
-### Links for tips and intructions
+### <font color=#728FCE>Links for tips and intructions</font>
 
 - [how to install Ansible](https://gitlab.com/ansible-workshop/labs/lab06)
 - infrastructure Used in this project deployed by terraform[Terraform repo](https://github.com/odedrafi/SelaBootcampWeek5Terraform.git)
