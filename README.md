@@ -49,3 +49,7 @@ In the azure devops UI we can intigrate everything we need for the project .
 - [how to install Ansible](https://gitlab.com/ansible-workshop/labs/lab06)
 - infrastructure Used in this project deployed by terraform[Terraform repo](https://github.com/odedrafi/SelaBootcampWeek5Terraform.git)
 - [Multi-stage yaml syntax example](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
+
+### expected resultes
+
+![expected_results image](images/expected_results.jpg)
