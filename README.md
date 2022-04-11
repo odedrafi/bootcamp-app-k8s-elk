@@ -40,16 +40,20 @@ In the azure devops UI we can intigrate everything we need for the project .
 
 ---
 
+### Demo
+
 ![Demo](docs/build-weight-tracker-app-demo.gif)
 
 ---
 
-## Links for tips and intructions
+### expected resultes
+
+![expected_results image](images/expected_results.jpg)
+
+---
+
+### Links for tips and intructions
 
 - [how to install Ansible](https://gitlab.com/ansible-workshop/labs/lab06)
 - infrastructure Used in this project deployed by terraform[Terraform repo](https://github.com/odedrafi/SelaBootcampWeek5Terraform.git)
 - [Multi-stage yaml syntax example](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
-
-### expected resultes
-
-![expected_results image](images/expected_results.jpg)
