@@ -36,7 +36,7 @@ In the azure devops UI we can intigrate everything we need for the project .
 
 - Using the show assistant on the top right of your piprline in edit mode, you can saerch for the action you want to preform. this will give us a blook of the command in yaml.
 - CD deployment default in the yaml pipeline version is auto (continues deployment) to change that will need to add an Enviroment <span style="color:red">and add an encapsulaion of the stage we want to control the deployment of, to our yaml pipeline code.</span>
-- thats it know on every commit your pipeline will start the ci\cd procces.
+- Now on every commit your pipeline will start the ci\cd procces.
 
 ---
 
@@ -57,3 +57,7 @@ In the azure devops UI we can intigrate everything we need for the project .
 - [how to install Ansible](https://gitlab.com/ansible-workshop/labs/lab06)
 - infrastructure Used in this project deployed by terraform[Terraform repo](https://github.com/odedrafi/SelaBootcampWeek5Terraform.git)
 - [Multi-stage yaml syntax example](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
+
+
+
+<font color=#893799>Readme is still in working mode...</font>
