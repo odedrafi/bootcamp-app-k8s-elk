@@ -13,35 +13,7 @@ stages:
         pool:
           name: "Default"
         steps:
-          - script: |
-              sudo apt-get update
-              sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-              sudo apt-get install -y nodejs
-              sudo apt npm install
-              sudo apt install zip
-            displayName: 'Install the dependency packages' 
-          - task: ArchiveFiles@2
-            inputs:
-              rootFolderOrFile: '$(Build.BinariesDirectory)'
-              includeRootFolder: true
-              archiveType: 'zip'
-              archiveFile: '$(Build.ArtifactStagingDirectory)/bootcamp-app.zip'
-              replaceExistingArchive: true
-          - task: PublishPipelineArtifact@1
-            inputs:
-              targetPath: '$(Pipeline.Workspace)'
-              artifact: 'arti$(Build.BuildId)'
-              publishLocation: 'pipeline'
-              
-          - task: UniversalPackages@0
-            inputs:
-              command: 'publish'
-              publishDirectory: '$(Build.ArtifactStagingDirectory)'
-              feedsToUsePublish: 'internal'
-              vstsFeedPublish: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/e5b481e2-145b-4a7b-8c02-a6516ea15b4a'
-              vstsFeedPackagePublish: 'arti$(Build.BuildId)'
-              versionOption: 'patch'
-              
+          - template: templates/anisiblePipline/CI_template.yaml
 
   - stage: DeployStaging
     dependsOn: build
@@ -51,41 +23,8 @@ stages:
         pool:
           name: "Default"
         steps:
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              buildType: 'current'
-              downloadType: 'single'
-              artifactName: 'arti$(Build.BuildId)'
-              downloadPath: '$(System.ArtifactsDirectory)'
-          
-          - task: ExtractFiles@1
-            inputs:
-              archiveFilePatterns: '../**/*.zip'
-              destinationFolder: 'bootcamp-app'
-              cleanDestinationFolder: true
-              overwriteExistingFiles: false
-          - script: |
-              cat  << EOF > .env
-              # Host configuration
-              PORT= $(http_port)
-              HOST=0.0.0.0
-              HOST_URL=http://$(public_ip):$(http_port)
-              COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
-              NODE_ENV=development
-              # Okta configuration
-              OKTA_ORG_URL=https://$(okta_org_url)
-              OKTA_CLIENT_ID= $(okta_client_id)
-              OKTA_CLIENT_SECRET= $(okta_client_secret)
-              # Postgres
-              PGHOST=$(pg_host)
-              PGUSERNAME=$(pg_username)
-              PGDATABASE=$(pg_database)
-              PGPASSWORD=$(pg_password)
-              PGPORT=5432
-              EOF
-          - script: |
-              ansible-playbook -i /home/adminuser/myagent/_work/1/s/inventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Staging"
-          
+          - template: templates/anisiblePipline/CD_Staging_template.yaml
+
   - stage: DeployProduction
     dependsOn: DeployStaging
     condition: succeeded()
@@ -99,43 +38,4 @@ stages:
         runOnce:
           deploy:          
             steps:
-              - task: DownloadBuildArtifacts@1
-                inputs:
-                  buildType: 'current'
-                  downloadType: 'single'
-                  artifactName: 'arti$(Build.BuildId)'
-                  downloadPath: '$(System.ArtifactsDirectory)'
-              - script: |
-                  sudo apt update 
-                  sudo apt install unzip 
-                displayName: install unzip  
-              - task: ExtractFiles@1
-                inputs:
-                  archiveFilePatterns: '../**/*.zip'
-                  destinationFolder: 'bootcamp-app'
-                  cleanDestinationFolder: true
-                  overwriteExistingFiles: false
-                      
-              - script: |
-                  cat  << EOF > .env
-                  # Host configuration
-                  PORT= $(http_port)
-                  HOST=0.0.0.0
-                  HOST_URL=http://$(production_public_ip):$(http_port)
-                  COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
-                  NODE_ENV=development
-                  # Okta configuration
-                  OKTA_ORG_URL=https://$(okta_org_url)
-                  OKTA_CLIENT_ID= $(okta_client_id)
-                  OKTA_CLIENT_SECRET= $(okta_client_secret)
-                  # Postgres
-                  PGHOST=$(production_host)
-                  PGUSERNAME=$(pg_username)
-                  PGDATABASE=$(pg_database)
-                  PGPASSWORD=$(pg_password)
-                  PGPORT=5432
-                  EOF
-                displayName: .env  
-              - script: |
-                  ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production"
-                displayName: Ansible        
+              - template: templates/anisiblePipline/CD_Production_template.yaml

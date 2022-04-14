@@ -1,0 +1,31 @@
+
+steps:
+  - script: |
+      sudo apt-get update
+      sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+      sudo apt-get install -y nodejs
+      sudo apt npm install
+      sudo apt install zip
+    displayName: 'Install the dependency packages' 
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.BinariesDirectory)'
+      includeRootFolder: true
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/bootcamp-app.zip'
+      replaceExistingArchive: true
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Pipeline.Workspace)'
+      artifact: 'arti$(Build.BuildId)'
+      publishLocation: 'pipeline'
+      
+  - task: UniversalPackages@0
+    inputs:
+      command: 'publish'
+      publishDirectory: '$(Build.ArtifactStagingDirectory)'
+      feedsToUsePublish: 'internal'
+      vstsFeedPublish: '4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/e5b481e2-145b-4a7b-8c02-a6516ea15b4a'
+      vstsFeedPackagePublish: 'arti$(Build.BuildId)'
+      versionOption: 'patch'
+      
