@@ -30,7 +30,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'DockerHubConnection'
-        repository: 'bootcamp'
+        repository: 'odedrafi/bootcampapp'
         command: 'buildAndPush'
         Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
 
