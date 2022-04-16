@@ -32,7 +32,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: 'bootcamp'
         command: 'buildAndPush'
-        Dockerfile: '/Dockerfile'
+        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
 
 
 
