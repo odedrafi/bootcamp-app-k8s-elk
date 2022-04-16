@@ -21,6 +21,10 @@ stages:
       clean: all
     steps:
     - template: templates/DockerPipeline/CI_template.yaml
+    
+
+
+
 
 # Continuous Deployment Process for Staging Environment
 - stage: DeployToStaging
