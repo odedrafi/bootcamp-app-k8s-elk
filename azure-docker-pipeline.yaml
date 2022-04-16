@@ -20,9 +20,17 @@ stages:
     workspace: 
       clean: all
     steps:
-    - template: templates/DockerPipeline/CI_template.yaml
-    
-
+    #- template: templates/DockerPipeline/CI_template.yaml
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConnection'
+        command: 'login'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConnection'
+        repository: 'bootcamp'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
 
 
 
@@ -39,7 +47,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: templates/DockerPipeline/CD_template.yaml
+          #- template: templates/DockerPipeline/CD_template.yaml
+          
+
+
           
 # Continuous Delivery Process for Production Environment
 - stage: DeployToProduction
