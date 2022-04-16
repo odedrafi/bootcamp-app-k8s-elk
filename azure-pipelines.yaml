@@ -39,3 +39,18 @@ stages:
           deploy:          
             steps:
               - template: templates/anisiblePipline/CD_Production_template.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              

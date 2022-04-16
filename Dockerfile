@@ -1,16 +1,18 @@
 FROM node:14-alpine
 
-# Create app directory
-WORKDIR /home/dminuser/bootcamp-app
-# Copy web files
+#create app directory
+WORKDIR /bootcamp-app
+
+#install all dependencies
+COPY package*.json ./
+RUN npm install
+
+# adding source code into the image
 COPY . .
-# Install npm dependencies
-# initializing the database part of the env file
-# initializing npm
-RUN npm install &&\
-    npm init -y &&\
-    npm run initdb
-# Opening port 8080 from the containter
+ENV PORT=8080
 EXPOSE 8080
+
+RUN  npm run initdb
+
 # Running the application (Entrypoint?=)
 ENTRYPOINT [ "npm", "run", "dev" ]
