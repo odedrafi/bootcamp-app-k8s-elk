@@ -1,7 +1,7 @@
 FROM node:14-alpine
 
 # Create app directory
-WORKDIR /home/ubuntu/bootcamp-app
+WORKDIR /home/dminuser/bootcamp-app
 # Copy web files
 COPY . .
 # Install npm dependencies
