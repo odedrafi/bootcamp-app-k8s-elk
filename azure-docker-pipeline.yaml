@@ -4,8 +4,8 @@ trigger:
 - master
 - feature/*
 
-pool:
-  name: Azure Pipelines
+# pool:
+#   name: Azure Pipelines
 
 # variables:
 #   YOURVARKEYS: YOURVARVALUES
@@ -17,6 +17,8 @@ stages:
 - stage: CI
   jobs:
   - job: BuildAndPushDocker
+    pool:
+      name: Azure Pipelines
     workspace: 
       clean: all
     steps:
