@@ -1,4 +1,4 @@
-name: <<YOUR PIPELINE NAME CONFIG>>
+
 
 trigger:
 - master
@@ -7,8 +7,8 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  YOURVARKEYS: YOURVARVALUES
+# variables:
+#   YOURVARKEYS: YOURVARVALUES
   
 
 stages:
