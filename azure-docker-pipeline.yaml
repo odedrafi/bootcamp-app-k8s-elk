@@ -18,7 +18,7 @@ stages:
   jobs:
   - job: BuildAndPushDocker
     pool:
-      name: Azure Pipelines
+      name: stagingPool
     workspace: 
       clean: all
     steps:
