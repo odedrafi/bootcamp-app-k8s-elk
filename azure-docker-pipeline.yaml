@@ -51,7 +51,7 @@ stages:
           
 
 
-          
+
 # Continuous Delivery Process for Production Environment
 - stage: DeployToProduction
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
@@ -65,4 +65,4 @@ stages:
       runOnce:
         deploy:
           steps:
-          - <<YOUR TASKS>>
+          
