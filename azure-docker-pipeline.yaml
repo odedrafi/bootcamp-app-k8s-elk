@@ -32,7 +32,7 @@ stages:
         containerRegistry: 'DockerHubConnection'
         repository: 'bootcamp'
         command: 'buildAndPush'
-        Dockerfile: 'home/adminuser/azagent/azagent/azagent/_work/1/s/Dockerfile'
+        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
 
 
 # Continuous Deployment Process for Staging Environment
