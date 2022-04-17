@@ -19,12 +19,12 @@
   - name: pull container
     shell:  docker pull odedrafi/bootcampapp
 
-  - name: kill previous docker
-    shell: |
-      if  [ $( docker ps -aq | wc -w ) -gt 0 ]; then
-        docker rm -f $(docker ps -aq)
-        docker rmi $(docker images -q)
-      f
+  # - name: kill previous docker
+  #   shell: |
+  #     if  [ $( docker ps -aq | wc -w ) -gt 0 ]; then
+  #       docker rm -f $(docker ps -aq)
+  #       docker rmi $(docker images -q)
+  #     f
 
   - script: |
       cat  << EOF > .env
