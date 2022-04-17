@@ -5,19 +5,19 @@
     - vars.yaml
 
   tasks:
-  - script: |
-      sudo apt update    
+  - name: update server
+    shell:   sudo apt update  &&  curl -fsSL https://get.docker.com -o get-docker.sh
 
-  - script: |
-      curl -fsSL https://get.docker.com -o get-docker.sh
+  - name: aloww docker access
+    shell:  
       sudo sh get-docker.sh
       sudo chmod 777 /var/run/docker.sock   
 
-  - script: |
-      docker login -u odedrafi -p {{registry_password}} https://hub.docker.com/  
+  - name: login to docker hub
+    shell:  docker login -u odedrafi -p {{registry_password}} https://hub.docker.com/  
 
-  - script: |
-      docker pull odedrafi/bootcampapp
+  - name: pull container
+    shell:  docker pull odedrafi/bootcampapp
 
   - name: kill previous docker
     shell: |
