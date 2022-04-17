@@ -26,7 +26,7 @@
       if  [ $( docker ps -aq | wc -w ) -gt 0 ]; then
         docker rm -f $(docker ps -aq)
         docker rmi $(docker images -q)
-      f
+      fi
 
   - name: .env
     shell:  | 
