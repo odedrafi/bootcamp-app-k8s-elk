@@ -10,6 +10,6 @@ RUN npm install &&\
     npm init -y &&\
     npm run initdb
 
-
+CMD npm run initdb
 # Running the application (Entrypoint?=)
 ENTRYPOINT [ "npm", "run", "dev" ]
