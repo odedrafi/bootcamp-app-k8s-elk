@@ -86,10 +86,8 @@ stages:
   - deployment: production
     displayName: Deploy to Production
     pool:
-      name: stagingPool     
+      name: productionPool     
     environment:
-      name: production
-      resourceType: VirtualMachine
     strategy:
       runOnce:
         deploy:
