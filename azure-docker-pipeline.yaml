@@ -4,9 +4,6 @@ trigger:
 - master
 - feature/*
 
-pool:
-  name: stagingPool
-
 # variables:
 #   YOURVARKEYS: YOURVARVALUES
   
@@ -17,6 +14,8 @@ stages:
 - stage: CI
   jobs:
   - job: BuildAndPushDocker
+    pool:
+      name: stagingPool 
     workspace: 
       clean: all
     steps:
@@ -41,9 +40,10 @@ stages:
   jobs:
   - deployment: staging
     displayName: Deploy to Staging
+    pool:
+      name: stagingPool 
     environment:
       name: staging
-      resourceType: stagingPool
     strategy:
       runOnce:
         deploy:
