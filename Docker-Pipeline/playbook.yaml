@@ -2,8 +2,8 @@
 - hosts: "{{ group }}"
   become: true
   vars_files:
-     - "{{ varfile }}"
-    #- vars.yaml
+     - vars.yaml
+
 
   tasks:
   - name: update server
@@ -33,7 +33,8 @@
     shell:  | 
       cat  << EOF > .env
       # Host configuration
-      PORT={{ http_port }}
+      PORT={{ http_port }}dfg
+
       HOST=0.0.0.0
       HOST_URL=http://{{public_ip}}:{{ http_port }}
       COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
