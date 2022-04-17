@@ -29,12 +29,6 @@ stages:
         repository: 'odedrafi/bootcampapp'
         command: 'buildAndPush'
         Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'DockerHubConnection'
-        repository: 'odedrafi/bootcampapp/production'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
 
 
 # Continuous Deployment Process for Staging Environment
