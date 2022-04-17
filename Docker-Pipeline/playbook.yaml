@@ -33,7 +33,7 @@
     shell:  | 
       cat  << EOF > .env
       # Host configuration
-      PORT={{ http_port }}dfg
+      PORT={{ http_port }}
 
       HOST=0.0.0.0
       HOST_URL=http://{{public_ip}}:{{ http_port }}
