@@ -15,7 +15,7 @@ stages:
   jobs:
   - job: BuildAndPushDocker
     pool:
-      name: stagingPool 
+      name: stagingPool && productionPool
     workspace: 
       clean: all
     steps:
