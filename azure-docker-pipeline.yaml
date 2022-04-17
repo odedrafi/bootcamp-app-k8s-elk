@@ -93,7 +93,7 @@ stages:
               command: 'login'
 
           - script: |
-              cat  << EOF > $(Build.Repository.LocalPath)/Docker-Pipeline/varsProduction.yaml
+              cat  << EOF > $(Build.Repository.LocalPath)/Docker-Pipeline/vars.yaml
               http_port: $(http_port)
               public_ip: $(production_public_ip)
 
@@ -108,4 +108,4 @@ stages:
               
               EOF
           - script: |
-              ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Staging varfile=varsProduction.yaml"
+              ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Production"
