@@ -2,7 +2,7 @@
 - hosts: "{{ group }}"
   become: true
   vars_files:
-    - vars
+    - vars.yaml
 
   tasks:
   - name: Update apt repo and cache on all Debian/Ubuntu boxes
