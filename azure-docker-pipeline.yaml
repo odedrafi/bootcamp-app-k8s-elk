@@ -5,10 +5,10 @@ trigger:
 - feature/*
 
 pool:
-  vmImage: ubuntu-latest
+  name: stagingPool
 
-variables:
-  YOURVARKEYS: YOURVARVALUES
+# variables:
+#   YOURVARKEYS: YOURVARVALUES
   
 
 stages:
