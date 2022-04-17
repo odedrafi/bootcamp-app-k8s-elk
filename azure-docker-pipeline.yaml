@@ -69,7 +69,7 @@ stages:
               
               EOF
           - script: |
-              ansible-playbook -i $(Build.Repository.LocalPath)/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Staging"
+              ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Staging"
 
 
 
