@@ -20,27 +20,27 @@ stages:
       clean: all
     steps:
     #- template: templates/DockerPipeline/CI_template.yaml
-    - task: Bash@3
-      inputs:
-        # targetType: 'inline'
-        # script: |
-        #   cat  << EOF > $(Build.Repository.LocalPath)/.env
-        #   http_port=$(http_port)
-        #   public_ip=$(public_ip)
-        #   HOST_URL=http://{{public_ip}}:{{ http_port }}
-        #   COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
-        #   NODE_ENV=development
-        #   # Okta configuration
-        #   okta_org_url=$(okta_org_url)
-        #   okta_client_id=$(okta_client_id)
-        #   okta_client_secret=$(okta_client_secret)
-        #   # Postgres
-        #   pg_host=$(pg_host)
-        #   pg_username=$(pg_username)
-        #   pg_database=$(pg_database)
-        #   pg_password=$(pg_password)
-        #   PGPORT=5432
-        #   EOF
+    # - task: Bash@3
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       cat  << EOF > $(Build.Repository.LocalPath)/.env
+    #       http_port=$(http_port)
+    #       public_ip=$(public_ip)
+    #       HOST_URL=http://{{public_ip}}:{{ http_port }}
+    #       COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+    #       NODE_ENV=development
+    #       # Okta configuration
+    #       okta_org_url=$(okta_org_url)
+    #       okta_client_id=$(okta_client_id)
+    #       okta_client_secret=$(okta_client_secret)
+    #       # Postgres
+    #       pg_host=$(pg_host)
+    #       pg_username=$(pg_username)
+    #       pg_database=$(pg_database)
+    #       pg_password=$(pg_password)
+    #       PGPORT=5432
+    #       EOF
     - task: Docker@2
       inputs:
         containerRegistry: 'DockerHubConnection'
