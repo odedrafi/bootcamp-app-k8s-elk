@@ -73,21 +73,21 @@ stages:
               containerRegistry: 'DockerHubConnection'
               command: 'login'
 
-          - script: |
-              cat  << EOF > $(Build.Repository.LocalPath)/Docker-Pipeline/vars.yaml
-              http_port: $(http_port)
-              public_ip: $(public_ip)
+          # - script: |
+          #     cat  << EOF > $(Build.Repository.LocalPath)/Docker-Pipeline/vars.yaml
+          #     http_port: $(http_port)
+          #     public_ip: $(public_ip)
 
-              okta_org_url: $(okta_org_url)
-              okta_client_id: $(okta_client_id)
-              okta_client_secret: $(okta_client_secret)
-              registry_password: $(registry_password)
-              pg_host: $(pg_host)
-              pg_username: $(pg_username)
-              pg_database: $(pg_database)
-              pg_password: $(pg_password)
+          #     okta_org_url: $(okta_org_url)
+          #     okta_client_id: $(okta_client_id)
+          #     okta_client_secret: $(okta_client_secret)
+          #     registry_password: $(registry_password)
+          #     pg_host: $(pg_host)
+          #     pg_username: $(pg_username)
+          #     pg_database: $(pg_database)
+          #     pg_password: $(pg_password)
               
-              EOF
+          #     EOF
           - script: |
               ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Staging"
 

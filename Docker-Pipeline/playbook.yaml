@@ -13,7 +13,7 @@
     become: true
     shell:  
       sudo sh get-docker.sh
-      sudo chmod 777 /var/run/docker.sock   
+      sudo chmod 666 /var/run/docker.sock   
 
   - name: login to docker hub
     shell:  docker login -u odedrafi -p {{registry_password}}   
@@ -28,31 +28,34 @@
         docker rmi $(docker images -q)
       fi
 
-  - name: .env
-    shell:  | 
-      cat  << EOF > .env
-      # Host configuration
-      PORT={{ http_port }}
-      HOST=0.0.0.0
-      HOST_URL=http://{{public_ip}}:{{ http_port }}
-      COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
-      NODE_ENV=development
-      # Okta configuration
-      OKTA_ORG_URL=https://{{ okta_org_url }}
-      OKTA_CLIENT_ID={{ okta_client_id }}
-      OKTA_CLIENT_SECRET={{ okta_client_secret }}
-      # Postgres
-      PGHOST={{ pg_host }}
-      PGUSERNAME={{ pg_username }}
-      PGDATABASE={{ pg_database }}
-      PGPASSWORD={{ pg_password }}
-      PGPORT=5432
-      EOF
+  # - name: .env
+  #   shell:  | 
+  #     cat  << EOF > .env
+  #     # Host configuration
+  #     PORT={{ http_port }}
+  #     HOST=0.0.0.0
+  #     HOST_URL=http://{{public_ip}}:{{ http_port }}
+  #     COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+  #     NODE_ENV=development
+  #     # Okta configuration
+  #     OKTA_ORG_URL=https://{{ okta_org_url }}
+  #     OKTA_CLIENT_ID={{ okta_client_id }}
+  #     OKTA_CLIENT_SECRET={{ okta_client_secret }}
+  #     # Postgres
+  #     PGHOST={{ pg_host }}
+  #     PGUSERNAME={{ pg_username }}
+  #     PGDATABASE={{ pg_database }}
+  #     PGPASSWORD={{ pg_password }}
+  #     PGPORT=5432
+  #     EOF
 
   - name: run Docker image
-    shell: 'docker run --restart=always -d --name bootcamp -p 8080:8080 -e PGHOST={{ pg_host }} -e PGUSERNAME={{ pg_username }} -e PGDATABASE=postgres -e PGPASSWORD={{ pg_password }} -e PGPORT=5432 -e PORT=8080 -e HOST=0.0.0.0 -e HOST_URL={{public_ip}} -e COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong! -e NODE_ENV=development -e OKTA_ORG_URL={{ okta_org_url }} -e OKTA_CLIENT_ID={{ okta_client_id }} -e OKTA_CLIENT_SECRET={{ okta_client_secret }} odedrafi/bootcampapp'
+    shell: docker run --restart=always -d -p 0.0.0.0:8080:8080/tcp odedrafi/bootcampapp
+    #
+  # 'docker run --restart=always -d --name bootcamp -p 8080:8080 -e PGHOST={{ pg_host }} -e PGUSERNAME={{ pg_username }} -e PGDATABASE=postgres -e PGPASSWORD={{ pg_password }} -e PGPORT=5432 -e PORT=8080 -e HOST=0.0.0.0 -e HOST_URL={{public_ip}} -e COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong! -e NODE_ENV=development -e OKTA_ORG_URL={{ okta_org_url }} -e OKTA_CLIENT_ID={{ okta_client_id }} -e OKTA_CLIENT_SECRET={{ okta_client_secret }} odedrafi/bootcampapp'
 
-    #docker run --restart always -d -p 0.0.0.0:8080:8080/tcp odedrafi/bootcampapp
+
+
 
   # - name: copy .env file to docker container
   #   shell: docker cp .env  $(sudo docker ps -aq):.env
@@ -62,4 +65,4 @@
 
   # - name: npm run initdb
   #   shell: docker exec $(sudo docker ps -aq) npm run initdb
-    # run_once: true    
+  #   run_once: true    
