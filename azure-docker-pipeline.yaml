@@ -15,7 +15,10 @@ stages:
   jobs:
   - job: BuildAndPushDocker
     pool:
-      name: stagingPool && productionPool
+      
+      name: stagingPool 
+      
+
     workspace: 
       clean: all
     steps:
@@ -29,7 +32,27 @@ stages:
         repository: 'odedrafi/bootcampapp'
         command: 'buildAndPush'
         Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
+- stage: CI-For-Production
+  jobs:
+  - job: BuildAndPushDocker
+    pool:
+      
+      name: productionPool 
+      
 
+    workspace: 
+      clean: all
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConnection'
+        command: 'login'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConnection'
+        repository: 'odedrafi/bootcampapp'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
 
 # Continuous Deployment Process for Staging Environment
 - stage: DeployToStaging
