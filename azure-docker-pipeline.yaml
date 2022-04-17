@@ -1,14 +1,14 @@
-
+name: <<YOUR PIPELINE NAME CONFIG>>
 
 trigger:
 - master
 - feature/*
 
-# pool:
-#   name: Azure Pipelines
+pool:
+  vmImage: ubuntu-latest
 
-# variables:
-#   YOURVARKEYS: YOURVARVALUES
+variables:
+  YOURVARKEYS: YOURVARVALUES
   
 
 stages:
@@ -17,53 +17,67 @@ stages:
 - stage: CI
   jobs:
   - job: BuildAndPushDocker
-    pool:
-      name: stagingPool
     workspace: 
       clean: all
     steps:
     #- template: templates/DockerPipeline/CI_template.yaml
+    
+
     - task: Docker@2
+      displayName: Login to Docker Hub
       inputs:
-        containerRegistry: 'DockerHubConnection'
-        command: 'login'
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'DockerHubConnection'
-        repository: 'odedrafi/bootcampapp'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
+        command: login
+        containerRegistry: dockerRegistryServiceConnection2
+
 
 
 # Continuous Deployment Process for Staging Environment
-# - stage: DeployToStaging
-#   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-#   jobs:
-#   - deployment: staging
-#     displayName: Deploy to Staging
-#     environment:
-#       name: staging
-#       resourceType: VirtualMachine
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - template: templates/DockerPipeline/CD_template.yaml
-          
+- stage: DeployToStaging
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: staging
+    displayName: Deploy to Staging
+    environment:
+      name: staging
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+         # - template: templates/DockerPipeline/CD_template.yaml
+          - script: |
+              cat  << EOF > bootcamp-app\Docker-Pipeline.env
+              http_port= $(http_port)
+              public_ip= $(public_ip)
+
+              okta_org_url= $(okta_org_url)
+              okta_client_id= $(okta_client_id)
+              okta_client_secret= $(okta_client_secret)
+            
+              pg_host= $(pg_host)
+              pg_username = $(pg_username)
+              pg_database= $(pg_database)
+              pg_password= $(pg_password)
+              
+              EOF          
+
+
+
+
 
 
 
 # Continuous Delivery Process for Production Environment
-# - stage: DeployToProduction
-#   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-#   jobs:
-#   - deployment: production
-#     displayName: Deploy to Production
-#     environment:
-#       name: production
-#       resourceType: VirtualMachine
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-          
+- stage: DeployToProduction
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: production
+    displayName: Deploy to Production
+    environment:
+      name: production
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - <<YOUR TASKS>>

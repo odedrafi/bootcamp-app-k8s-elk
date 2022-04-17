@@ -1,67 +1,32 @@
 ---
 - hosts: "{{ group }}"
   become: true
+  vars_files:
+    - vars
+
   tasks:
-  - name: Install aptitude using apt
-    apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
-
-  - name: Install required system packages
-    apt: name={{ item }} state=latest update_cache=yes
-    loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
-
-  - name: Add Docker GPG apt Key
-    apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      state: present
-
-  - name: Add Docker Repository
-    apt_repository:
-      repo: deb https://download.docker.com/linux/ubuntu bionic stable
-      state: present
-
-  - name: install docker
+  - name: Update apt repo and cache on all Debian/Ubuntu boxes
     apt:
-      name: "{{item}}"
-      state: latest
-      update_cache: yes
-    loop:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
+     update_cache: yes
+     force_apt_get: yes
+     cache_valid_time: 3600  
 
-  - name: docker was started and enabled
-    service:
-      name: docker
-      state: started
-      enabled: yes
-  
-  - name: run docker without sudo
-    shell:
-      cmd: sudo chmod 666 /var/run/docker.sock
-      chdir: /home/azureuser
-      executable: /bin/bash
-  
-  - name: Transfer file from agentServer to hosting servers
-    synchronize:
-      src: /home/azureuser/myagent/_work/1/a/bootcamp.zip
-      dest: /home/azureuser/
-  
-  - name: kill previous docker
-    shell: |
-      if  [ $( docker ps -aq | wc -w ) -gt 0 ]; then
-      docker rm -f $(docker ps -aq)
-      docker rmi $(docker images -q)
-      fi
-  - name: load docker image from file
-    shell: docker load -i /home/azureuser/bootcamp.zip
-
-  - name: run Docker image
-    shell: docker run --restart always -d -p 0.0.0.0:8080:8080/tcp $(docker images -q)
-
-
-    
-
-
-
-
-
+  - script: |
+      cat  << EOF > .env
+      # Host configuration
+      PORT= {{ http_port }}
+      HOST=0.0.0.0
+      HOST_URL=http://{{public_ip}}:{{ http_port }}
+      COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+      NODE_ENV=development
+      # Okta configuration
+      OKTA_ORG_URL=https://{{ okta_org_url }}
+      OKTA_CLIENT_ID={{ okta_client_id }}
+      OKTA_CLIENT_SECRET={{ okta_client_secret }}
+      # Postgres
+      PGHOST={{ pg_host }}
+      PGUSERNAME={{ pg_username }}
+      PGDATABASE={{ pg_database }}
+      PGPASSWORD={{ pg_password }}
+      PGPORT=5432
+      EOF
