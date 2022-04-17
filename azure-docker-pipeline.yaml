@@ -87,7 +87,7 @@ stages:
     displayName: Deploy to Production
     pool:
       name: productionPool     
-    environment:
+    environment: production
     strategy:
       runOnce:
         deploy:
