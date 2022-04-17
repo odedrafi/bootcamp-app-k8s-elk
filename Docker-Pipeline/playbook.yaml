@@ -6,9 +6,11 @@
 
   tasks:
   - name: update server
+    become: true
     shell:   sudo apt update  &&  curl -fsSL https://get.docker.com -o get-docker.sh
 
   - name: aloww docker access
+    become: true
     shell:  
       sudo sh get-docker.sh
       sudo chmod 777 /var/run/docker.sock   
