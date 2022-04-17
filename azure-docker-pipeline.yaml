@@ -32,7 +32,7 @@ stages:
         repository: 'odedrafi/bootcampapp'
         command: 'buildAndPush'
         Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
-- stage: CI-For-Production
+- stage: ProductionCI
   jobs:
   - job: BuildAndPushDocker
     pool:
