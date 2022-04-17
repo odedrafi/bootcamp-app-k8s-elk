@@ -50,7 +50,7 @@ stages:
           steps:
          # - template: templates/DockerPipeline/CD_template.yaml
           - script: |
-              cat  << EOF > bootcamp-app\Docker-Pipeline.env
+              cat  << EOF > $(Build.Repository.LocalPath)/Docker-Pipeline/vars.yaml
               http_port= $(http_port)
               public_ip= $(public_ip)
 
