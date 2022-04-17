@@ -54,12 +54,12 @@
 
     #docker run --restart always -d -p 0.0.0.0:8080:8080/tcp odedrafi/bootcampapp
 
-  - name: copy .env file to docker container
-    shell: docker cp .env  $(sudo docker ps -aq):.env
+  # - name: copy .env file to docker container
+  #   shell: docker cp .env  $(sudo docker ps -aq):.env
 
-  - name: restart docker container
-    shell: docker restart $(sudo docker ps -aq)
+  # - name: restart docker container
+  #   shell: docker restart $(sudo docker ps -aq)
 
-  - name: npm run initdb
-    shell: docker exec $(sudo docker ps -aq) npm run initdb
-    run_once: true    
+  # - name: npm run initdb
+  #   shell: docker exec $(sudo docker ps -aq) npm run initdb
+    # run_once: true    
