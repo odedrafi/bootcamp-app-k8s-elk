@@ -29,7 +29,12 @@ stages:
         repository: 'odedrafi/bootcampapp'
         command: 'buildAndPush'
         Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
-
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConnection'
+        repository: 'odedrafi/bootcampapp/production'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
 
 
 # Continuous Deployment Process for Staging Environment
@@ -67,7 +72,7 @@ stages:
               
               EOF
           - script: |
-              ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Staging"
+              ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Staging varfile=vars.yaml"
 
 
 
@@ -75,16 +80,39 @@ stages:
 
 
 # Continuous Delivery Process for Production Environment
-# - stage: DeployToProduction
-#   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-#   jobs:
-#   - deployment: production
-#     displayName: Deploy to Production
-#     environment:
-#       name: production
-#       resourceType: VirtualMachine
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - <<YOUR TASKS>>
+- stage: DeployToProduction
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: production
+    displayName: Deploy to Production
+    pool:
+      name: stagingPool     
+    environment:
+      name: production
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'DockerHubConnection'
+              command: 'login'
+
+          - script: |
+              cat  << EOF > $(Build.Repository.LocalPath)/Docker-Pipeline/varsProduction.yaml
+              http_port: $(http_port)
+              public_ip: $(public_ip)
+
+              okta_org_url: $(okta_org_url)
+              okta_client_id: $(okta_client_id)
+              okta_client_secret: $(okta_client_secret)
+              registry_password: $(registry_password)
+              pg_host: $(pg_host)
+              pg_username: $(pg_username)
+              pg_database: $(pg_database)
+              pg_password: $(pg_password)
+              
+              EOF
+          - script: |
+              ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Staging varfile=varsProduction.yaml"
