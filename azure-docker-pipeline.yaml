@@ -42,8 +42,7 @@ stages:
     displayName: Deploy to Staging
     pool:
       name: stagingPool 
-    environment:
-      name: staging
+    environment: staging
     strategy:
       runOnce:
         deploy:
