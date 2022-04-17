@@ -50,7 +50,7 @@
     shell: docker run --restart always -d -p 0.0.0.0:8080:8080/tcp odedrafi/bootcampapp
 
   - name: copy .env file to docker container
-    shell: docker cp ~/.env  $(sudo docker ps -aq):/usr/src/app/.env
+    shell: docker cp .env  $(sudo docker ps -aq):.env
 
   - name: restart docker container
     shell: docker restart $(sudo docker ps -aq)
