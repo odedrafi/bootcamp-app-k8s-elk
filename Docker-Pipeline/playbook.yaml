@@ -30,24 +30,24 @@
 
   - name: .env
     shell:  | 
-          cat  << EOF > .env
-          # Host configuration
-          PORT={{ http_port }}
-          HOST=0.0.0.0
-          HOST_URL=http://{{public_ip}}:{{ http_port }}
-          COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
-          NODE_ENV=development
-          # Okta configuration
-          OKTA_ORG_URL=https://{{ okta_org_url }}
-          OKTA_CLIENT_ID={{ okta_client_id }}
-          OKTA_CLIENT_SECRET={{ okta_client_secret }}
-          # Postgres
-          PGHOST={{ pg_host }}
-          PGUSERNAME={{ pg_username }}
-          PGDATABASE={{ pg_database }}
-          PGPASSWORD={{ pg_password }}
-          PGPORT=5432
-          EOF
+        cat  << EOF > .env
+        # Host configuration
+        PORT={{ http_port }}
+        HOST=0.0.0.0
+        HOST_URL=http://{{public_ip}}:{{ http_port }}
+        COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+        NODE_ENV=development
+        # Okta configuration
+        OKTA_ORG_URL=https://{{ okta_org_url }}
+        OKTA_CLIENT_ID={{ okta_client_id }}
+        OKTA_CLIENT_SECRET={{ okta_client_secret }}
+        # Postgres
+        PGHOST={{ pg_host }}
+        PGUSERNAME={{ pg_username }}
+        PGDATABASE={{ pg_database }}
+        PGPASSWORD={{ pg_password }}
+        PGPORT=5432
+        EOF
 
   - name: run Docker image
     shell: docker run --restart always -d -p 0.0.0.0:8080:8080/tcp odedrafi/bootcampapp
