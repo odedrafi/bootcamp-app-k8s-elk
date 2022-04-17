@@ -14,7 +14,7 @@
       sudo chmod 777 /var/run/docker.sock   
 
   - name: login to docker hub
-    shell:  docker login -u odedrafi -p {{registry_password}} https://hub.docker.com/  
+    shell:  docker login -u odedrafi -p {{registry_password}}   
 
   - name: pull container
     shell:  docker pull odedrafi/bootcampapp
