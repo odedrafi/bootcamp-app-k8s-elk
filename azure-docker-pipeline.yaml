@@ -1,4 +1,4 @@
-name: <<YOUR PIPELINE NAME CONFIG>>
+name: build_$(Date:yyyyMMdd)$(Rev:r)
 
 trigger:
 - master
