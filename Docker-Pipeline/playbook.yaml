@@ -50,7 +50,7 @@
       EOF
 
   - name: run Docker image
-    shell: docker run --restart=always -d --name bootcamp -p 8080:8080 -e PGHOST={{ pg_host }} -e PGUSERNAME={{ pg_username }} -e PGDATABASE=postgres -e PGPASSWORD={{ pg_password }} -e PGPORT=5432 -e PORT=8080 -e HOST=0.0.0.0 -e HOST_URL={{public_ip}} -e COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong! -e NODE_ENV=development -e OKTA_ORG_URL={{ okta_org_url }} -e OKTA_CLIENT_ID={{ okta_client_id }} -e OKTA_CLIENT_SECRET={{ okta_client_secret }} odedrafi/bootcampapp'
+    shell: 'docker run --restart=always -d --name bootcamp -p 8080:8080 -e PGHOST={{ pg_host }} -e PGUSERNAME={{ pg_username }} -e PGDATABASE=postgres -e PGPASSWORD={{ pg_password }} -e PGPORT=5432 -e PORT=8080 -e HOST=0.0.0.0 -e HOST_URL={{public_ip}} -e COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong! -e NODE_ENV=development -e OKTA_ORG_URL={{ okta_org_url }} -e OKTA_CLIENT_ID={{ okta_client_id }} -e OKTA_CLIENT_SECRET={{ okta_client_secret }} odedrafi/bootcampapp'
 
     #docker run --restart always -d -p 0.0.0.0:8080:8080/tcp odedrafi/bootcampapp
 
