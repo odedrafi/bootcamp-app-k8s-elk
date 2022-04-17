@@ -107,5 +107,5 @@ stages:
               
               EOF
           - script: |
-              ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Production"
+              ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/prdinventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Production"
               
