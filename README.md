@@ -8,7 +8,7 @@
 
 [![Build Status](https://dev.azure.com/odedrafi35/bootcamp-app/_apis/build/status/bootcamp-app?branchName=master)](https://dev.azure.com/odedrafi35/bootcamp-app/_build/latest?definitionId=7&branchName=master)  [![arti315 package in Feed_Good@Local feed in Azure Artifacts](https://feeds.dev.azure.com/odedrafi35/4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/_apis/public/Packaging/Feeds/Feed_Good@Local/Packages/77bc383b-cc35-4f74-a078-9b893b7e4f86/Badge)](https://dev.azure.com/odedrafi35/bootcamp-app/_artifacts/feed/Feed_Good@Local/UPack/arti315/0.0.1)
 
-<img src="https://open-source-guide.com/var/site_smile/storage/images/guide-os/actualites/le-moteur-docker-disponible-en-version-20-10/869332-1-fre-FR/Le-moteur-Docker-disponible-en-version-20.10_actualite_home.png" width="120" height="120"/>       <img src="images\512px-Node.js_logo.png" width="160" height="120"/>                              <img src="images\Ansible_logo.png" width="120" height="120"/>
+<img src="https://open-source-guide.com/var/site_smile/storage/images/guide-os/actualites/le-moteur-docker-disponible-en-version-20-10/869332-1-fre-FR/Le-moteur-Docker-disponible-en-version-20.10_actualite_home.png" width="120" height="120"/>       <img src="images/512px-Node.js_logo.png" width="160" height="120"/>                              <img src="images/Ansible_logo.png" width="120" height="120"/>
 
 # <font color=#728FCE>Description</font>
 
@@ -28,7 +28,7 @@ this project is part of bottcamp in sela[Sela DevOps Bootcamp Page](https://rhin
 
 <font color=#728FCE>ci\cd illustration</font>
 
-<img src="images\docker-cicd.png" width="500" height="400"/><img src="images\project-cicd.png" width="500" height="300"/>
+<img src="images/docker-cicd.png" width="500" height="400"/><img src="images/project-cicd.png" width="500" height="300"/>
 
 ## <font color=#728FCE>Requirements:</font>
 
@@ -64,10 +64,10 @@ In the azure devops UI we can intigrate everything we need for the project .
 - Now on every commit your pipeline will start the ci\cd procces.
 ##### <font color=#0046FF>deployment of the docker pipeline:</font>
 In this Pipeline we will manage the code of our application using a simple Git workflow called the “Feature Branch Workflow” in which branches named with the prefix “feature/” are used to work on the code independently and then the code is integrated into the master/main branch to be deployed in the target environments.
-<img src="images\feature-branch.png" width="500" height="400"/>
+<img src="images/feature-branch.png" width="500" height="400"/>
 
 To optimize our worflow will configure a branch policy for the master/main branch to enforce Code Review by using Pull Requests and a Build Validation Policy to ensure that the changes are ok before integrating them. as shown in the example below:
-<img src="images\branch policies and build validation.jpg" width="1000" height="400"/>
+<img src="images/branch policies and build validation.jpg" width="1000" height="400"/>
 
 The CI/CD process will meet the following requirements:
 
@@ -86,7 +86,7 @@ The CI/CD process will meet the following requirements:
 
 ENV file format:
 
-<img src="images\ENV_example.jpg" width="1000" height="400"/>
+<img src="images/ENV_example.jpg" width="1000" height="400"/>
 ---
 
 ### <font color=#728FCE>Demo</font>
