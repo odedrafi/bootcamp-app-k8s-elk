@@ -8,7 +8,7 @@
 
 [![Build Status](https://dev.azure.com/odedrafi35/bootcamp-app/_apis/build/status/bootcamp-app?branchName=master)](https://dev.azure.com/odedrafi35/bootcamp-app/_build/latest?definitionId=7&branchName=master)  [![arti315 package in Feed_Good@Local feed in Azure Artifacts](https://feeds.dev.azure.com/odedrafi35/4a4ba2b7-9d9a-4fd5-b166-f4ed9948c80b/_apis/public/Packaging/Feeds/Feed_Good@Local/Packages/77bc383b-cc35-4f74-a078-9b893b7e4f86/Badge)](https://dev.azure.com/odedrafi35/bootcamp-app/_artifacts/feed/Feed_Good@Local/UPack/arti315/0.0.1)
 
-<img src="https://open-source-guide.com/var/site_smile/storage/images/guide-os/actualites/le-moteur-docker-disponible-en-version-20-10/869332-1-fre-FR/Le-moteur-Docker-disponible-en-version-20.10_actualite_home.png" width="120" height="120"/>       <img src="images\512px-Node.js_logo.svg.png" width="160" height="120"/>                              <img src="images\Ansible_logo.svg.png" width="120" height="120"/>
+<img src="https://open-source-guide.com/var/site_smile/storage/images/guide-os/actualites/le-moteur-docker-disponible-en-version-20-10/869332-1-fre-FR/Le-moteur-Docker-disponible-en-version-20.10_actualite_home.png" width="120" height="120"/>       <img src="images\512px-Node.js_logo.png" width="160" height="120"/>                              <img src="images\Ansible_logo.png" width="120" height="120"/>
 
 # <font color=#728FCE>Description</font>
 
