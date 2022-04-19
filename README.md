@@ -85,8 +85,8 @@ The CI/CD process will meet the following requirements:
   > docker run [--restart=always](https://docs.docker.com/config/containers/start-containers-automatically/) [--env-file](https://docs.docker.com/compose/env-file/)='.env' -d -p 0.0.0.0:8080:8080/tcp odedrafi/bootcampapp
 
 ENV file format:
+![This is an image](images/ENV_example.jpg)
 
-<img src="images/ENV_example.jpg" width="1000" height="400"/>
 ---
 
 ### <font color=#728FCE>Demo</font>
