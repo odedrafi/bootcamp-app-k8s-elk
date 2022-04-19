@@ -18,11 +18,13 @@ in here we will try to explain the steps to take inorder to make it work!
 
 This project intales two Pipeline implimantations.
 > univarsal packadge pipline that uses azure artifact to store our CI build(with file<span style="color:red"> "azure-pipelines.yaml"</span>)
+
 > Docker packadging of our app in the CI build.and storing it in docker hub(with file<span style="color:red"> "azure-docker-pipeline.yaml"</span>)
 
 <font color=#728FCE>Both of thouse implimantations uses the power Ansible to deploy the app to our Environments. the ansible playbook and inventory files are located in folders:</font>
-><span style="color:red"> ansiblePipelineFiles</span>
-><span style="color:red"> Docker-Pipeline</span>
+> <span style="color:red"> ansiblePipelineFiles</span>
+
+> <span style="color:red"> Docker-Pipeline</span>
 
 this project is part of bottcamp in sela[Sela DevOps Bootcamp Page](https://rhinops.io/bootcamp).
 
