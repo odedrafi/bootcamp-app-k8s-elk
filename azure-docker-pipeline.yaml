@@ -4,8 +4,7 @@ trigger:
 - main
 - feature/*
 
-# variables:
-#   YOURVARKEYS: YOURVARVALUES
+
   
 
 stages:
@@ -15,31 +14,7 @@ stages:
   jobs:
   - job: BuildAndPushDocker
     pool:
-      
       name: stagingPool 
-      
-
-    workspace: 
-      clean: all
-    steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'DockerHubConnection'
-        command: 'login'
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'DockerHubConnection'
-        repository: 'odedrafi/bootcampapp'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
-- stage: ProductionCI
-  jobs:
-  - job: BuildAndPushDocker
-    pool:
-      
-      name: productionPool 
-      
-
     workspace: 
       clean: all
     steps:
@@ -67,12 +42,11 @@ stages:
       runOnce:
         deploy:
           steps:
-         # - template: templates/DockerPipeline/CD_template.yaml
           - task: Docker@2
             inputs:
               containerRegistry: 'DockerHubConnection'
               command: 'login'
-
+          
           - script: |
               cat  << EOF > $(Build.Repository.LocalPath)/Docker-Pipeline/vars.yaml
               http_port: $(http_port)
@@ -91,13 +65,9 @@ stages:
           - script: |
               ansible-playbook -i $(Build.Repository.LocalPath)/Docker-Pipeline/StagingInventory.ini $(Build.Repository.LocalPath)/Docker-Pipeline/playbook.yaml --extra-vars "group=Staging"
 
-
-
-
-
-
 # Continuous Delivery Process for Production Environment
 - stage: DeployToProduction
+  
   #condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   jobs:
   - deployment: production
@@ -113,7 +83,7 @@ stages:
             inputs:
               containerRegistry: 'DockerHubConnection'
               command: 'login'
-
+          
           - script: |
               cat  << EOF > $(Build.Repository.LocalPath)/Docker-Pipeline/vars.yaml
               http_port: $(http_port)
