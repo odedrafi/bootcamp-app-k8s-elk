@@ -35,10 +35,16 @@ this project is part of bottcamp in sela[Sela DevOps Bootcamp Page](https://rhin
 
 - Install Docker on each of the virtual machines by these commands:
   >sudo apt-get update 
-  apt-get upgrade -y
-  curl -fsSL https://get.docker.com/ -o get-docker.sh
-  bash get-docker.sh
-  sudo chmod 666 /var/run/docker.sock (to make the container accesible)  
+
+  >apt-get upgrade -y
+
+  >curl -fsSL https://get.docker.com/ -o get-docker.sh
+
+  >bash get-docker.sh
+
+  >sudo chmod 666 /var/run/docker.
+  
+  >sock (to make the container accesible)  
 - Node.js 14.x 
 - PostgreSQL (can be installed locally using Docker)
 - Free Okta developer account for account registration, login
