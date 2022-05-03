@@ -33,7 +33,7 @@ stages:
   - deployment: production
     displayName: Deploy to aks
     pool:
-      name: productionPool     
+      name: BuildPool     
     environment: aks
     strategy:
       runOnce:
