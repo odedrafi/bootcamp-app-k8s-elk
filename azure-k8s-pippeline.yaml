@@ -28,4 +28,15 @@ stages:
 # Continuous Deployment Process for Staging Environment
 - stage: DeployToStaging
   
+  jobs:
+  - deployment: production
+    displayName: Deploy to Production
+    pool:
+      name: productionPool     
+    environment: production
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+  
 # Continuous Delivery Process for Production Environment
