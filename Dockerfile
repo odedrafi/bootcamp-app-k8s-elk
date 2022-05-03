@@ -4,7 +4,7 @@ FROM node:14-alpine
 WORKDIR /home/adminuser/myagent/_work/1/s/
 
 #install all dependencies
-COPY . .
+COPY package*.json ./
 
 RUN npm install &&\
     npm init -y &&\

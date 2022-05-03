@@ -1,0 +1,31 @@
+name: build_$(Date:yyyyMMdd)$(Rev:r)
+
+trigger:
+- main
+
+stages:
+
+# Continuous Integration Process
+- stage: CI
+  jobs:
+  - job: BuildAndPushContainer
+    pool:
+      name: BuildPool 
+    workspace: 
+      clean: all
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConnection'
+        command: 'login'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHubConnection'
+        repository: 'odedrafi/bootcampapp'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
+
+# Continuous Deployment Process for Staging Environment
+- stage: DeployToStaging
+  
+# Continuous Delivery Process for Production Environment
