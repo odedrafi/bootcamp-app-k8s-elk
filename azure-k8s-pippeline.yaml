@@ -14,29 +14,30 @@ stages:
     workspace: 
       clean: all
     steps:
+
     - task: Docker@2
       inputs:
-        containerRegistry: 'DockerHubConnection'
+        containerRegistry: 'acr'
         command: 'login'
     - task: Docker@2
       inputs:
-        containerRegistry: 'DockerHubConnection'
-        repository: 'odedrafi/bootcampapp'
+        containerRegistry: 'acr'
+        repository: 'myrepo'
         command: 'buildAndPush'
-        Dockerfile: '$(Build.Repository.LocalPath)/Dockerfile'
+        Dockerfile: '**/Dockerfile'
 
 # Continuous Deployment Process for Staging Environment
-- stage: DeployToStaging
+# - stage: DeployToStaging
   
-  jobs:
-  - deployment: production
-    displayName: Deploy to Production
-    pool:
-      name: productionPool     
-    environment: production
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-  
+#   jobs:
+#   - deployment: production
+#     displayName: Deploy to Production
+#     pool:
+#       name: productionPool     
+#     environment: production
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+           
 # Continuous Delivery Process for Production Environment
