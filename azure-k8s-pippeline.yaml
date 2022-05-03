@@ -27,17 +27,26 @@ stages:
         Dockerfile: '**/Dockerfile'
 
 # Continuous Deployment Process for Staging Environment
-# - stage: DeployToStaging
+- stage: DeployToStaging
   
-#   jobs:
-#   - deployment: production
-#     displayName: Deploy to Production
-#     pool:
-#       name: productionPool     
-#     environment: production
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-           
-# Continuous Delivery Process for Production Environment
+  jobs:
+  - deployment: production
+    displayName: Deploy to aks
+    pool:
+      name: productionPool     
+    environment: aks
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'aks'
+              namespace: 'default'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'kubernates/deployment.yaml'
+              secretType: 'dockerRegistry'
+              containerRegistryType: 'Azure Container Registry'
+Continuous Delivery Process for Production Environment
