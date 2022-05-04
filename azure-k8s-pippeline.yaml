@@ -42,10 +42,10 @@ stages:
           - task: Kubernetes@1
             inputs:
               connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'aks-k8s-weight-tracker-default-1651619614427'
+              kubernetesServiceEndpoint: 'aks'
               command: 'apply'
               useConfigurationFile: true
-              configuration: 'kubernates/ingress.yaml'
+              configuration: 'kubernates/manifests/ingress.yaml'
               secretType: 'dockerRegistry'
               containerRegistryType: 'Azure Container Registry'
           - task: Kubernetes@1
@@ -53,9 +53,25 @@ stages:
               connectionType: 'Kubernetes Service Connection'
               kubernetesServiceEndpoint: 'aks'
               namespace: 'default'
-              command: 'apply'
+              command: 'create'
               useConfigurationFile: true
-              configuration: 'kubernates/deployment.yaml'
+              configuration: 'kubernates/manifests/service.yaml'
               secretType: 'dockerRegistry'
               containerRegistryType: 'Azure Container Registry'
+ 
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'aks'
+              namespace: 'default'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'kubernates/manifests/deployment.yaml'
+              secretType: 'generic'
+              secretArguments: '--from-literal=HOST=0.0.0.0 --from-literal=PORT=8080 --from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) --from-literal=HOST_URL=$(HOST_URL) --from-literal=OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) --from-literal=OKTA_ORG_URL=$(OKTA_ORG_URL) --from-literal=PGHOST=$(PG_HOST) --from-literal=PGUSERNAME=$(PG_USER) --from-literal=PGDATABASE=$(PG_USER) --from-literal=PGPASSWORD=$(PG_PASS) --from-literal=PGPORT=$(5432)'
+
+              
+              
+
+
 #Continuous Delivery Process for Production Environment
