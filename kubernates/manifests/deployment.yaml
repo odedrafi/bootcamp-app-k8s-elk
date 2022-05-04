@@ -15,7 +15,9 @@ spec:
       containers:
         - name: myrepo
           image: acrforapp.azurecr.io/myrepo:49
-
+          envFrom:
+            - secretRef:
+                name: app-secret
           resources:
             requests:
               cpu: 100m
@@ -25,6 +27,3 @@ spec:
               memory: 256Mi
           ports:
             - containerPort: 80
-          envFrom:
-            - secretRef:
-                name: app-secret
