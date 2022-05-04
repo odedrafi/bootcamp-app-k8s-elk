@@ -43,31 +43,13 @@ stages:
             inputs:
               connectionType: 'Kubernetes Service Connection'
               kubernetesServiceEndpoint: 'aks'
-              namespace: 'default'
               command: 'apply'
               useConfigurationFile: true
               configuration: 'kubernates/manifests/ingress.yaml'
               secretType: 'dockerRegistry'
               containerRegistryType: 'Azure Container Registry'
-          - task: Kubernetes@1
-            inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'aks-k8s-weight-tracker-default-1651619614427'
-              namespace: 'default'
-              command: 'apply'
-              useConfigurationFile: true
-              configuration: 'kubernates/manifests/ingress.yaml'
-              secretType: 'dockerRegistry'
-              containerRegistryType: 'Azure Container Registry'
-          - task: Kubernetes@1
-            inputs:
-              connectionType: 'None'
-              namespace: 'default'
-              command: 'apply'
-              useConfigurationFile: true
-              configuration: 'kubernates/manifests/service.yaml'
-              secretType: 'dockerRegistry'
-              containerRegistryType: 'Azure Container Registry'
+
+ 
           - task: Kubernetes@1
             inputs:
               connectionType: 'Kubernetes Service Connection'
