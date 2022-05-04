@@ -15,7 +15,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: app-secret
-              key: PGPASSWORD
+              key: PG_PASSW
 
 ---
 kind: Service
