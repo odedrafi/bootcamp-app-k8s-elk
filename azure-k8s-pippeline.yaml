@@ -66,7 +66,7 @@ stages:
               command: 'apply'
               useConfigurationFile: true
               configurationType: 'inline'
-              inline: '-f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml'
+              inline: '-f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml --validate=false'
               secretType: 'dockerRegistry'
               containerRegistryType: 'Azure Container Registry'
           - task: Kubernetes@1
