@@ -50,8 +50,8 @@ stages:
                     --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) \
                     --from-literal=PGHOST=$(PG_HOST) \
                     --from-literal=PGUSERNAME=$(PG_USER) \
-                    --from-literal=PG_DATA_BASE=$(PG_USER) \
-                    --from-literal=PG_PASS=$(PG_PASS) \
+                    --from-literal=PGDATABASE=$(PG_USER) \
+                    --from-literal=PGPASSWORD=$(PG_PASS) \
                     --from-literal=PGPORT=5432
                   displayName: create env
 
