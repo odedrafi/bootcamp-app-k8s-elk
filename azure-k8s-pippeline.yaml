@@ -42,7 +42,7 @@ stages:
           - task: Kubernetes@1
             inputs:
               connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'aks'
+              kubernetesServiceEndpoint: 'aks-k8s-weight-tracker-default-1651619614427'
               namespace: 'default'
               command: 'apply'
               useConfigurationFile: true
