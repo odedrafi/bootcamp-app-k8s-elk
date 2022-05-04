@@ -51,7 +51,7 @@ stages:
                     --from-literal=PGHOST=$(PG_HOST) \
                     --from-literal=PGUSERNAME=$(PG_USER) \
                     --from-literal=PG_DATA_BASE=$(PG_USER) \
-                    --from-literal=PGP_PASS=$(PG_PASS) \
+                    --from-literal=PG_PASS=$(PG_PASS) \
                     --from-literal=PGPORT=5432
                   displayName: create env
 
