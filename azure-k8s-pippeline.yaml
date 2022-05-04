@@ -59,7 +59,7 @@ stages:
           #     secretType: 'dockerRegistry'
           #     containerRegistryType: 'Azure Container Registry'
           
-          - bash: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
+          - script: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
 
           - task: Kubernetes@1
             inputs:
