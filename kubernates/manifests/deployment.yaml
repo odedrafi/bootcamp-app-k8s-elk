@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: myrepo
-          image: acrforapp.azurecr.io/myrepo
+          image: acrforapp.azurecr.io/myrepo:latest
           resources:
             requests:
               cpu: 100m

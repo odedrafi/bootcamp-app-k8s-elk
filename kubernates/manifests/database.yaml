@@ -12,11 +12,10 @@ spec:
         - containerPort: 5432
       env:
         - name: POSTGRES_PASSWORD
-          value: PG_PASS
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_DATABASE
-          value: postgres
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: PGPASSWORD
 
 ---
 kind: Service
