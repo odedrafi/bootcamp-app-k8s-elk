@@ -15,8 +15,7 @@ spec:
       containers:
         - name: myrepo
           image: acrforapp.azurecr.io/myrepo:latest
-      imagePullSecrets:
-        - name: ACR_ACCESS
+
           resources:
             requests:
               cpu: 100m
@@ -29,3 +28,5 @@ spec:
           envFrom:
             - secretRef:
                 name: app-secret
+          imagePullSecrets:
+            - name: ACR_ACCESS
