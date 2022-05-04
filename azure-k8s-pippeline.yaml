@@ -39,20 +39,37 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: KubernetesManifest@0
+          - task: Kubernetes@1
             inputs:
-              action: 'createSecret'
-              kubernetesServiceConnection: 'aks'
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'aks'
               namespace: 'default'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'kubernates/manifests/ingress.yaml'
+              secretType: 'dockerRegistry'
+              containerRegistryType: 'Azure Container Registry'
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'aks'
+              namespace: 'default'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'kubernates/manifests/service.yaml'
+              secretType: 'dockerRegistry'
+              containerRegistryType: 'Azure Container Registry'
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              kubernetesServiceEndpoint: 'aks'
+              namespace: 'default'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'kubernates/manifests/deployment.yaml'
               secretType: 'generic'
-              secretName: 'secrets'
               secretArguments: '--from-literal=HOST=0.0.0.0 --from-literal=PORT=8080 --from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) --from-literal=HOST_URL=$(HOST_URL) --from-literal=OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) --from-literal=OKTA_ORG_URL=$(OKTA_ORG_URL) --from-literal=PGHOST=$(PG_HOST) --from-literal=PGUSERNAME=$(PG_USER) --from-literal=PGDATABASE=$(PG_USER) --from-literal=PGPASSWORD=$(PG_PASS) --from-literal=PGPORT=$(5432)'
-          - task: KubernetesManifest@0
-            inputs:
-              action: 'deploy'
-              kubernetesServiceConnection: 'aks'
-              namespace: 'default'
-              manifests: 'kubernates/manifests/ingress.yaml'
+
               
               
 
