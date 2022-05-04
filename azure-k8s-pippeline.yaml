@@ -39,23 +39,22 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: Kubernetes@1
+          - task: KubernetesManifest@0
             inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'aks-k8s-weight-tracker-default-1651619614427'
-              command: 'apply'
-              useConfigurationFile: true
-              configuration: 'kubernates/ingress.yaml'
-              secretType: 'dockerRegistry'
-              containerRegistryType: 'Azure Container Registry'
-          - task: Kubernetes@1
-            inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'aks'
+              action: 'createSecret'
+              kubernetesServiceConnection: 'aks'
               namespace: 'default'
-              command: 'apply'
-              useConfigurationFile: true
-              configuration: 'kubernates/deployment.yaml'
-              secretType: 'dockerRegistry'
-              containerRegistryType: 'Azure Container Registry'
+              secretType: 'generic'
+              secretName: 'secrets'
+              secretArguments: '--from-literal=HOST=0.0.0.0 --from-literal=PORT=8080 --from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) --from-literal=HOST_URL=$(HOST_URL) --from-literal=OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) --from-literal=OKTA_ORG_URL=$(OKTA_ORG_URL) --from-literal=PGHOST=$(PG_HOST) --from-literal=PGUSERNAME=$(PG_USER) --from-literal=PGDATABASE=$(PG_USER) --from-literal=PGPASSWORD=$(PG_PASS) --from-literal=PGPORT=$(5432)'
+          - task: KubernetesManifest@0
+            inputs:
+              action: 'deploy'
+              kubernetesServiceConnection: 'aks'
+              namespace: 'default'
+              manifests: 'kubernates/manifests/ingress.yaml'
+              
+              
+
+
 #Continuous Delivery Process for Production Environment
