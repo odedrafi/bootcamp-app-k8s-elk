@@ -63,10 +63,10 @@ stages:
                 #     containerRegistryType: "Azure Container Registry"
 
                 - script: |
-                    kubectl apply -f deployment.yml 
-                    kubectl apply -f service.yml 
-                    kubectl apply -f database.yml 
-                    kubectl apply -f ingress.yml
+                    kubectl apply -f kubernates/manifests/deployment.yaml 
+                    kubectl apply -f kubernates/manifests/service.yaml 
+                    kubectl apply -f kubernates/manifests/database.yaml 
+                    kubectl apply -f kubernates/manifests/ingress.yaml
                     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
 
                 # - task: Kubernetes@1
