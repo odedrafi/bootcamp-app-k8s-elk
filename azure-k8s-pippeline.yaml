@@ -37,7 +37,7 @@ stages:
           runOnce:
             deploy:
               steps:
-                - bash: |
+                - script: |
                     kubectl delete secret app-secret
                     kubectl create secret generic app-secret \ 
                     --from-literal=PORT=8080 \
