@@ -28,5 +28,5 @@ spec:
           envFrom:
             - secretRef:
                 name: app-secret
-          imagePullSecrets:
-            - name: ACR_ACCESS
+      imagePullSecrets:
+        - name: ACR_ACCESS
