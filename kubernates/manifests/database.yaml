@@ -12,10 +12,11 @@ spec:
         - containerPort: 5432
       env:
         - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: weight-tracker-secret
-              key: PGPASSWORD
+          value: PG_PASS
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_DATABASE
+          value: postgres
 
 ---
 kind: Service
