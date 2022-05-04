@@ -51,8 +51,7 @@ stages:
               containerRegistryType: 'Azure Container Registry'
           - task: Kubernetes@1
             inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'aks'
+              connectionType: 'None'
               namespace: 'default'
               command: 'apply'
               useConfigurationFile: true
