@@ -48,16 +48,16 @@ stages:
               configuration: 'kubernates/manifests/ingress.yaml'
               secretType: 'dockerRegistry'
               containerRegistryType: 'Azure Container Registry'
-          - task: Kubernetes@1
-            inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'aks'
-              namespace: 'default'
-              command: 'create'
-              useConfigurationFile: true
-              configuration: 'kubernates/manifests/service.yaml'
-              secretType: 'dockerRegistry'
-              containerRegistryType: 'Azure Container Registry'
+          # - task: Kubernetes@1
+          #   inputs:
+          #     connectionType: 'Kubernetes Service Connection'
+          #     kubernetesServiceEndpoint: 'aks'
+          #     namespace: 'default'
+          #     command: 'create'
+          #     useConfigurationFile: true
+          #     configuration: 'kubernates/manifests/service.yaml'
+          #     secretType: 'dockerRegistry'
+          #     containerRegistryType: 'Azure Container Registry'
           - task: Kubernetes@1
             inputs:
               connectionType: 'Kubernetes Service Connection'
