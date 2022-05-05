@@ -25,15 +25,3 @@ spec:
                 secretKeyRef:
                   name: app-secret
                   key: PGPASSWORD
-
----
-kind: Service
-metadata:
-  name: postgres-service
-spec:
-  selector:
-    app: postgres
-  ports:
-    - protocol: TCP
-      port: 5432
-      targetPort: 5432
