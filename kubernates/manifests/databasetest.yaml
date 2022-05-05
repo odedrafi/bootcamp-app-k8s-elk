@@ -14,5 +14,5 @@ spec:
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: weight-tracker-secret
+              name: app-secret
               key: PGPASSWORD
