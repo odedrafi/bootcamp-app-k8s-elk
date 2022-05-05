@@ -19,10 +19,11 @@ stages:
               command: "login"
           - task: Docker@2
             inputs:
-              containerRegistry: "acr"
-              repository: "myrepo"
-              command: "buildAndPush"
-              Dockerfile: "**/Dockerfile"
+              containerRegistry: 'acr'
+              repository: 'myrepo'
+              command: 'buildAndPush'
+              Dockerfile: '**/Dockerfile'
+              tags: '$(Build.BuildId):latest'
 
   # Continuous Deployment Process for Staging Environment
   - stage: DeployToStaging
