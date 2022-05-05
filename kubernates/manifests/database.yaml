@@ -17,6 +17,11 @@ spec:
               name: app-secret
               key: PGPASSWORD
 
+        - name: PGHOST
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: PGHOST
 ---
 kind: Service
 apiVersion: v1
