@@ -23,7 +23,7 @@ stages:
               repository: 'myrepo'
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
-              tags: ':latest'
+              tags: 'latest'
 
   # Continuous Deployment Process for Staging Environment
   - stage: DeployToStaging
