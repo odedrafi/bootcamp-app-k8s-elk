@@ -39,41 +39,22 @@ stages:
               steps:
                 - script: |
                     kubectl delete secret app-secret
-                    kubectl create secret generic app-secret \
-                    --from-literal=PORT=80 \
+                    kubectl create secret generic app-secret \ 
+                    --from-literal=PORT=8080 \
                     --from-literal=HOST=0.0.0.0 \
                     --from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) \
-                    --from-literal=NODE_ENV=$(NODE_ENV) \
+                    --from-literal=HOST=0.0.0.0 \
+                    --from-literal=NODE_ENV=$(NODE_ENV) \                    
                     --from-literal=HOST_URL=$(HOST_URL) \
                     --from-literal=OKTA_ORG_URL=$(OKTA_ORG_URL) \
                     --from-literal=OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) \
                     --from-literal=OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) \
                     --from-literal=PGHOST=$(PG_HOST) \
                     --from-literal=PGUSERNAME=$(PG_USER) \
-                    --from-literal=PGDATABASE=$(PG_USER) \
+                    --from-literal=PG_DATA_BASE=$(PG_USER) \
                     --from-literal=PGPASSWORD=$(PG_PASS) \
                     --from-literal=PGPORT=5432
                   displayName: create env
-
-                # - task: Kubernetes@1
-                #   inputs:
-                #     connectionType: "Kubernetes Service Connection"
-                #     kubernetesServiceEndpoint: "aks"
-                #     command: "apply"
-                #     useConfigurationFile: true
-                #     configuration: "kubernates/manifests/ingress.yaml"
-                #     secretType: "dockerRegistry"
-                #     containerRegistryType: "Azure Container Registry"
-                # - task: Kubernetes@1
-                #   inputs:
-                #     connectionType: "Kubernetes Service Connection"
-                #     kubernetesServiceEndpoint: "aks"
-                #     namespace: "default"
-                #     command: "create"
-                #     useConfigurationFile: true
-                #     configuration: "kubernates/manifests/service.yaml"
-                #     secretType: "dockerRegistry"
-                #     containerRegistryType: "Azure Container Registry"
 
                 - script: |
                     kubectl apply -f kubernates/manifests/deployment.yaml 
@@ -82,31 +63,3 @@ stages:
                     kubectl apply -f kubernates/manifests/ingress.yaml
                     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
                   displayName: pull image and apply
-                # - task: Kubernetes@1
-                #   inputs:
-                #     connectionType: "Kubernetes Service Connection"
-                #     kubernetesServiceEndpoint: "aks"
-                #     namespace: "default"
-                #     command: "apply"
-                #     useConfigurationFile: true
-                #     configuration: "kubernates/manifests/database.yaml"
-                #     secretType: "dockerRegistry"
-                #     containerRegistryType: "Azure Container Registry"
-                #     azureSubscriptionEndpointForSecrets: "Azure Pass - Sponsorship(8a02b264-a496-4739-af84-aae1eff76034)"
-                #     azureContainerRegistry: "acrforapp.azurecr.io"
-                #     secretName: "app-secret"
-
-                # - task: Kubernetes@1
-                #   inputs:
-                #     connectionType: "Kubernetes Service Connection"
-                #     kubernetesServiceEndpoint: "aks"
-                #     namespace: "default"
-                #     command: "apply"
-                #     useConfigurationFile: true
-                #     configuration: "kubernates/manifests/deployment.yaml"
-                #     secretType: "dockerRegistry"
-                #     containerRegistryType: "Azure Container Registry"
-                #     azureSubscriptionEndpointForSecrets: "Azure Pass - Sponsorship(8a02b264-a496-4739-af84-aae1eff76034)"
-                #     azureContainerRegistry: "acrforapp.azurecr.io"
-                #     secretName: "app-secret"
-#Continuous Delivery Process for Production Environment
