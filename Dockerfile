@@ -7,8 +7,11 @@ WORKDIR /home/adminuser/myagent/_work/1/s/
 COPY package*.json ./
 
 RUN npm install
+
 COPY . .
+
 EXPOSE 80
+
 CMD npm run initdb
 # Running the application (Entrypoint?=)
 ENTRYPOINT [ "npm", "run", "dev" ]

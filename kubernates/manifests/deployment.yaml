@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: myrepo
-          image: acrforapp.azurecr.io/myrepo:latest
+          image: acrforapp.azurecr.io/myrepo
           envFrom:
             - secretRef:
                 name: app-secret
