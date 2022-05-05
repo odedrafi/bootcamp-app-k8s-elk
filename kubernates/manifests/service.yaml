@@ -9,14 +9,3 @@ spec:
       targetPort: 80
   selector:
     app: myrepo
----
-kind: Service
-metadata:
-  name: postgres-service
-spec:
-  selector:
-    app: postgres
-  ports:
-    - protocol: TCP
-      port: 5432
-      targetPort: 5432
