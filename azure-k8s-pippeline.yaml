@@ -40,7 +40,7 @@ stages:
                 - script: |
                     kubectl delete secret app-secret
                     kubectl create secret generic app-secret \
-                    --from-literal=PORT=8080 \
+                    --from-literal=PORT=80 \
                     --from-literal=HOST=0.0.0.0 \
                     --from-literal=COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) \
                     --from-literal=NODE_ENV=$(NODE_ENV) \
