@@ -19,11 +19,11 @@ stages:
               command: "login"
           - task: Docker@2
             inputs:
-              containerRegistry: 'acr'
-              repository: 'myrepo'
-              command: 'buildAndPush'
-              Dockerfile: '**/Dockerfile'
-              tags: 'latest'
+              containerRegistry: "acr"
+              repository: "myrepo"
+              command: "buildAndPush"
+              Dockerfile: "**/Dockerfile"
+              tags: "latest"
 
   # Continuous Deployment Process for Staging Environment
   - stage: DeployToStaging
@@ -58,6 +58,7 @@ stages:
 
                 - script: |
                     kubectl apply -f kubernates/manifests/deployment.yaml 
+                    kubectl apply -f kubernates/manifests/databasetest.yaml
                     kubectl apply -f kubernates/manifests/service.yaml 
                     kubectl apply -f kubernates/manifests/database.yaml 
                     kubectl apply -f kubernates/manifests/ingress.yaml
