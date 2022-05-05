@@ -20,11 +20,12 @@ spec:
           ports:
             - containerPort: 5432
           env:
-            - name: PGPASSWORD
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: app-secret
                   key: PGPASSWORD
+
 ---
 kind: Service
 metadata:
