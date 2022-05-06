@@ -71,6 +71,7 @@ stages:
                   displayName: create env
 
                 - script: | 
+                    kubectl apply -f kubernates/manifests/databasetest.yaml
                     kubectl apply -f kubernates/manifests/database.yaml
                     kubectl apply -f kubernates/manifests/service.yaml 
                     kubectl apply -f kubernates/manifests/ingress.yaml
