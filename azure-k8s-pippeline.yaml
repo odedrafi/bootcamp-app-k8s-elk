@@ -17,7 +17,12 @@ stages:
             inputs:
               containerRegistry: "acr"
               command: "login"
-          - script: docker rmi acrforapp.azurecr.io/myrepo:latest
+          - script: if[docker inspect acrforapp.azurecr.io/myrepo:latest];then
+                       docker rmi acrforapp.azurecr.io/myrepo:latest
+                    fi   
+
+
+
           - task: Docker@2
             inputs:
               containerRegistry: "acr"
