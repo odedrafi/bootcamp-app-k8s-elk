@@ -21,7 +21,7 @@ stages:
           - task: Docker@2
             inputs:
               containerRegistry: 'acr'
-              repository: 'myrepo'
+              repository: 'postgres'
               command: 'push'
               tags: 'oded'
           - task: Docker@2
