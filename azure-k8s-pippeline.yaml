@@ -66,4 +66,4 @@ stages:
                     kubectl apply -f kubernates/manifests/ingress.yaml
                     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
                   displayName: pull image and apply
-                #- script: kubectl apply -f kubernates/manifests/deployment.yaml  
+                - script: kubectl apply -f kubernates/manifests/deployment.yaml  
