@@ -17,8 +17,13 @@ stages:
             inputs:
               containerRegistry: "acr"
               command: "login"
-          - script: docker rmi acrforapp.azurecr.io/myrepo:latest
-
+         # - script: docker rmi acrforapp.azurecr.io/myrepo:latest
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'acr'
+              repository: 'myrepo'
+              command: 'push'
+              tags: 'oded'
           - task: Docker@2
             inputs:
               containerRegistry: 'acr'
