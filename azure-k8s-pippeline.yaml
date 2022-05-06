@@ -19,7 +19,12 @@ stages:
               command: "login"
           - script: docker rmi acrforapp.azurecr.io/myrepo:latest
 
-
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'acr'
+              repository: 'myrepo'
+              command: 'buildAndPush'
+              Dockerfile: 'https://github.com/docker-library/postgres/blob/e8ebf74e50128123a8d0220b85e357ef2d73a7ec/12/alpine/Dockerfile'
 
           - task: Docker@2
             inputs:
