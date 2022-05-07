@@ -27,3 +27,7 @@ spec:
               memory: 256Mi
           ports:
             - containerPort: 80
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "npm run initdb"]
