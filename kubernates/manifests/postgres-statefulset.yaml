@@ -31,6 +31,10 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql/data
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", npm run initdb]
   volumeClaimTemplates:
     - metadata:
         name: data
