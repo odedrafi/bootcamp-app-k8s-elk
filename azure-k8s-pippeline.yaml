@@ -76,7 +76,7 @@ stages:
                   displayName: pull image and apply
                 - script: |
                     kubectl apply -f kubernates/manifests/deployment.yaml
-                    if ! kubectl rollout status deployment myrepo; 
+                    if ! kubectl rollout status deployment myrepo; then
                         kubectl rollout undo deployment myrepo
                         kubectl rollout status deployment myrepo
                         exit 1
