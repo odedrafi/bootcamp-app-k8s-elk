@@ -74,6 +74,7 @@ this project is part of bottcamp in sela[Sela DevOps Bootcamp Page](https://rhin
 - This pipline uses files to deploy the k8s cluster with kubectl commmands using the .yaml file in the repo
 
 ![This is an image](images/expectedresults.jpg)
+
 ![This is an image](images/k8syamfiles.png)
 
 
@@ -98,25 +99,13 @@ this project is part of bottcamp in sela[Sela DevOps Bootcamp Page](https://rhin
 
 <span style="color:red">This project dosn't yet containe a ci\cd pipeline for infrastructureso it will have to be deployd manually.us</span>
 ### <font color=#728FCE>Create an azure devops project:</font>
-##### <font color=#728FCE>deployment of universal packadge Pipeline:</font>
-In the azure devops UI we can intigrate everything we need for the project .
+##### <font color=#728FCE>deployment of k8s Pipeline:</font>
 
-> here are the steps demonstrated in this pproject
 
-- import your app repo to Azure Repo
-
-- Go to Azure Pipelines tab and start a new pipeline using a multi staged yaml(not classic) file
-- We will run a simple dependacies installation and archive our solution as an artifact and Publish it(save it) to Azure artifacts
-  for that purpose we can use the command which is suited for ci testing :
-
-  > $ [npm ci](https://docs.npmjs.com/cli/v8/commands/npm-ci)
+>for this you will need to create a library in the azure dev ops project and with the vlues a secret inthe cluster will be created as part of the pipeline code.
+according to env format
 
 <span style="color:red"></span>
-##### <font color=#0046FF>deployment of the docker pipeline:</font>
-
-
-ENV file format:
-![This is an image](images/ENV_example.jpg)
 
 ---
 
@@ -129,19 +118,16 @@ ENV file format:
 
 ### <font color=#728FCE>expected resultes</font>
 
-<span style="color:red">Universal packadge pipeline.</span>
-![expected_results image](images/expected_results.jpg)
+<span style="color:red">k8s pipeline.</span>
+![expected_results image](images/results.png)
 
-<span style="color:red">Docker pipeline.</span>
-![expected_results image](images/Docker_Pipeline_results.jpg)
+
 
 ---
 
 ### <font color=#728FCE>Links for tips and intructions</font>
 
-- [how to install Ansible](https://gitlab.com/ansible-workshop/labs/lab06)
-- infrastructure Used in this project deployed by terraform[Terraform repo](https://github.com/odedrafi/SelaBootcampWeek5Terraform.git)
-- [Multi-stage yaml syntax example](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
+... readme not completed
 
 
 
