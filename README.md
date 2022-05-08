@@ -67,15 +67,16 @@ this project is part of bottcamp in sela[Sela DevOps Bootcamp Page](https://rhin
 
 <font color=#728FCE>ci\cd illustration</font>
 
-![This is an image](images/docker-cicd.png)![This is an image](images/project-cicd.png)
+![This is an image](images/k8s-cicd.png)
 
 ## <font color=#728FCE>running the pipeline:</font>
 
 - This pipline uses files to deploy the k8s cluster with kubectl commmands using the .yaml file in the repo
-
-![This is an image](images/expectedresults.jpg)
-
 ![This is an image](images/k8syamfiles.png)
+
+
+
+
 
 
 
@@ -95,10 +96,8 @@ this project is part of bottcamp in sela[Sela DevOps Bootcamp Page](https://rhin
 - Node.js 14.x 
 - PostgreSQL (can be installed locally using Docker)
 - Free Okta developer account for account registration, login
-## <font color=#728FCE>Deployment</font>
 
-<span style="color:red">This project dosn't yet containe a ci\cd pipeline for infrastructureso it will have to be deployd manually.us</span>
-### <font color=#728FCE>Create an azure devops project:</font>
+
 ##### <font color=#728FCE>deployment of k8s Pipeline:</font>
 
 
