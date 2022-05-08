@@ -65,9 +65,9 @@ stages:
                 ## exit the pipline with exit code (1)
                 - script: |
                     kubectl apply -f kubernates/manifests/postgres-statefulset.yaml 
-                    if ! kubectl rollout status StatefulSet postgres-statefulset; then
-                        kubectl rollout undo StatefulSet postgres-statefulset
-                        kubectl rollout status StatefulSet postgres-statefulset
+                    if ! kubectl rollout status StatefulSet postgresql-sfs; then
+                        kubectl rollout undo StatefulSet postgresql-sfs
+                        kubectl rollout status StatefulSet postgresql-sfs
                         exit 1
                     fi
                     kubectl apply -f kubernates/manifests/service.yaml 
