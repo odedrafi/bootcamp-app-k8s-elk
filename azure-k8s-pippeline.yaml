@@ -13,13 +13,13 @@ stages:
         workspace:
           clean: all
         steps:
-          - task: Docker@2
+          - task: Docker@2 ## step 1 connecting to acr
             inputs:
               containerRegistry: "acr"
               command: "login"
-          - script: docker rmi acrforapp.azurecr.io/myrepo:latest
+          - script: docker rmi acrforapp.azurecr.io/myrepo:latest ## step 2 deleting old container
 
-          - task: Docker@2
+          - task: Docker@2 ## building image from Dockerfile and pushing to acr
             inputs:
               containerRegistry: "acr"
               repository: "myrepo"
@@ -61,7 +61,8 @@ stages:
                   displayName: create env
                 ## running kubectl commands to create our
                 ## reasources in the cluster from the yaml files
-                ## in our repo
+                ## in our repo and checking if rollout succeded if not
+                ## exit the pipline with exit code (1)
                 - script: |
                     kubectl apply -f kubernates/manifests/postgres-statefulset.yaml 
                     if ! kubectl rollout status StatefulSet postgres-statefulset; then
