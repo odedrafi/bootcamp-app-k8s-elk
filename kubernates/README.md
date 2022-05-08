@@ -1,4 +1,5 @@
--- manifests
+.
+`-- manifests
     |-- database.yaml
     |-- deployment.yaml
     |-- ingress.yaml
