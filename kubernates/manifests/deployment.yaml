@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myrepo
+  name: myrepo ## name oof deployment
 spec:
-  replicas: 3
+  replicas: 3 ## number of pods
   selector:
     matchLabels:
       app: myrepo
@@ -13,11 +13,11 @@ spec:
         app: myrepo
     spec:
       containers:
-        - name: myrepo
-          image: acrforapp.azurecr.io/myrepo
+        - name: myrepo ## container name in acr
+          image: acrforapp.azurecr.io/myrepo ## my image from acr
           envFrom:
             - secretRef:
-                name: app-secret
+                name: app-secret ## my k8s secret name
           resources:
             requests:
               cpu: 100m
