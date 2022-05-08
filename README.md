@@ -1,4 +1,4 @@
-# <font color=#728FCE>CI/CD Pipeline</font>
+# <font color=#728FCE>Kubernates pipeline for nodejs app</font>
 
 
 
@@ -13,13 +13,12 @@
 
 # <font color=#728FCE>Description</font>
 
-hi!! have you ever wanted to integrate your nodejs app on a CI\CD with azure devops?. this is the place for you !
-in here we will try to explain the steps to take inorder to make it work!
+Weight-tracker webapp used as par of [Sela DevOps Bootcamp Page](https://rhinops.io/bootcamp). deploying in azure devops in a kubernates pipeline implimatation.
 
-This project intales two Pipeline implimantations.
+This project intales one Pipeline implimantation.
 > univarsal packadge pipline that uses azure artifact to store our CI build(with file<span style="color:red"> "azure-pipelines.yaml"</span>)
 
-> Docker packadging of our app in the CI build.and storing it in docker hub(with file<span style="color:red"> "azure-docker-pipeline.yaml"</span>)
+> Docker packadging of our app in the CI build.and storing it in docker hub with file(<span style="color:red"> "azure-docker-pipeline.yaml"</span>)
 
 <font color=#728FCE>Both of thouse implimantations uses the power Ansible to deploy the app to our Environments. the ansible playbook and inventory files are located in folders:</font>
 > <span style="color:red"> ansiblePipelineFiles</span>
