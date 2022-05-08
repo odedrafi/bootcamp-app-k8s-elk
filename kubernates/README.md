@@ -1,3 +1,4 @@
+```markdown
 .
 `-- manifests
     |-- database.yaml
@@ -5,3 +6,4 @@
     |-- ingress.yaml
     |-- postgres-statefulset.yaml
     `-- service.yaml
+```
