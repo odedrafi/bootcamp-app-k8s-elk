@@ -17,7 +17,7 @@ stages:
             inputs:
               containerRegistry: "acr"
               command: "login"
-          # - script: docker rmi acrforapp.azurecr.io/myrepo:latest
+          - script: docker rmi acrforapp.azurecr.io/myrepo:latest
 
           - task: Docker@2
             inputs:
@@ -40,6 +40,8 @@ stages:
           runOnce:
             deploy:
               steps:
+                ## creating secrt in aks cluster with flag --from-literal
+                ## to send secret values throw the library .env format
                 - script: |
                     kubectl delete secret app-secret
                     kubectl create secret generic app-secret \
@@ -57,9 +59,11 @@ stages:
                     --from-literal=PGPASSWORD=$(PG_PASS) \
                     --from-literal=PGPORT=5432
                   displayName: create env
-
+                ## running kubectl commands to create our
+                ## reasources in the cluster from the yaml files
+                ## in our repo
                 - script: |
-                    kubectl apply -f kubernates/manifests/postgres-statefulset.yaml
+                    kubectl apply -f kubernates/manifests/postgres-statefulset.yaml 
 
                     kubectl apply -f kubernates/manifests/service.yaml 
                     kubectl apply -f kubernates/manifests/ingress.yaml
