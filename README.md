@@ -17,13 +17,16 @@ For the infrastracture we will use the repo from [k8s terrafom infrastructure re
 
 # <font color=#728FCE>Pipeline Agent  initialization</font>
 
+### After applying the environment we will need to configure our pipeline agent either maually, or by creating a script to run the following init commands:
+<span style="color:red">(red section is were to edit to your variables)</span>
+
 - update the server:
 > sudo apt-get update
 
 - Install docker with:
 > sudo apt-get install -y docker.io
 
-- Open acces to fockr run
+- Open acces to dockr run
 >sudo chmod 666 /var/run/docker.
 
 - Install kubectl with:
@@ -40,20 +43,20 @@ For the infrastracture we will use the repo from [k8s terrafom infrastructure re
 
 - Make sure to connect to your cluster by :
 
-> az aks get-credentials --resource-group {your resource group name} --name {your azure kubernates cluster name} --overwrite-existing
+> az aks get-credentials --resource-group <span style="color:red">{your resource group name}</span> --name <span style="color:red">{your azure kubernates cluster name}</span> --overwrite-existing
 
 - Connect your azure container repository to your aks 
 
-> az aks update -n {your azure kubernates cluster name}  -g RG --attach-acr {your azure container registery name} 
+> az aks update -n <span style="color:red">{your azure kubernates cluster name}</span>  -g RG --attach-acr <span style="color:red">{your azure container registery name}</span> 
 
-- Run this script <span style="color:red">(red section is were to edit to your variables)</span>  to connect your agent to azure devops pipline:
+- Run this script to connect your agent to azure devops pipline:
 
-> mkdir azagent
+mkdir azagent
 cd azagent
 curl -fkSL -o vstsagent.tar.gz https://vstsagentpackage.azureedge.net/agent/2.202.1/vsts-agent-linux-x64-2.202.1.tar.gz
 tar -zxvf vstsagent.tar.gz
 if [ -x "$(command -v systemctl)" ]; then
-    ./config.sh --pool <span style="color:red"> {your pool name}</span> --acceptteeeula --agent $HOSTNAME --url <span style="color:red"> {your azure devops project url}</span> --work _work --projectname <span style="color:red"> {'your azure devops project name'}</span> --auth PAT --token <span style="color:red"> {your azure devops pat token}</span> --runasservice
+    ./config.sh --pool <span style="color:red"> {your pool name}</span>  --acceptteeeula --agent $HOSTNAME --url <span style="color:red"> {your azure devops project url}</span> --work _work --projectname <span style="color:red"> {'your azure devops project name'}</span> --auth PAT --token <span style="color:red"> {your azure devops pat token}</span> --runasservice
     sudo ./svc.sh install
     sudo ./svc.sh start
 else
@@ -61,6 +64,7 @@ else
     ./run.sh
 fi
 
+---
 
 this project is part of bottcamp in sela[Sela DevOps Bootcamp Page](https://rhinops.io/bootcamp).
 
