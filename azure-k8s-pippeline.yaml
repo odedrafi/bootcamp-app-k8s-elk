@@ -26,7 +26,7 @@ stages:
               command: "buildAndPush"
               Dockerfile: "**/Dockerfile"
               tags: $(Build.BuildId)
-          
+
   # Continuous Deployment Process for Staging Environment
   - stage: DeployToStaging
 
@@ -65,19 +65,19 @@ stages:
                 ## exit the pipline with exit code (1)
                 - script: |
                     kubectl apply -f kubernates/manifests/postgres-statefulset.yaml 
-                    if ! kubectl rollout status StatefulSet postgresql-sfs; then
-                        kubectl rollout undo StatefulSet postgresql-sfs
-                        kubectl rollout status StatefulSet postgresql-sfs
-                        exit 1
-                    fi
+                    # if ! kubectl rollout status StatefulSet postgresql-sfs; then
+                    #     kubectl rollout undo StatefulSet postgresql-sfs
+                    #     kubectl rollout status StatefulSet postgresql-sfs
+                    #     exit 1
+                    # fi
                     kubectl apply -f kubernates/manifests/service.yaml 
                     kubectl apply -f kubernates/manifests/ingress.yaml
                     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
                   displayName: pull image and apply
                 - script: |
                     kubectl apply -f kubernates/manifests/deployment.yaml
-                    if ! kubectl rollout status deployment myrepo; then
-                        kubectl rollout undo deployment myrepo
-                        kubectl rollout status deployment myrepo
-                        exit 1
-                    fi
+                    # if ! kubectl rollout status deployment myrepo; then
+                    #     kubectl rollout undo deployment myrepo
+                    #     kubectl rollout status deployment myrepo
+                    #     exit 1
+                    # fi
