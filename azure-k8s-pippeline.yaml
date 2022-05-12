@@ -17,7 +17,7 @@ stages:
             inputs:
               containerRegistry: "acr"
               command: "login"
-          - script: docker rmi acrforapp.azurecr.io/myrepo:latest ## step 2 deleting old container
+          #- script: docker rmi acrforapp.azurecr.io/myrepo:latest ## step 2 deleting old container
 
           - task: Docker@2 ## building image from Dockerfile and pushing to acr
             inputs:
@@ -25,8 +25,8 @@ stages:
               repository: "myrepo"
               command: "buildAndPush"
               Dockerfile: "**/Dockerfile"
-              tags: "latest"
-
+              tags: $(Build.BuildId)
+          
   # Continuous Deployment Process for Staging Environment
   - stage: DeployToStaging
 
