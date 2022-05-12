@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: myrepo ## container name in acr
-          image: acrforapp.azurecr.io/myrepo #$(Build.BuildId) ## my image from acr
+          image: acrforapp.azurecr.io/myrepo:154 #$(Build.BuildId) ## my image from acr
           envFrom:
             - secretRef:
                 name: app-secret ## my k8s secret name
