@@ -6,7 +6,7 @@ WORKDIR /home/adminuser/myagent/_work/1/s/
 #install all dependencies
 COPY package*.json ./
 
-RUN npm install
+RUN npm install && npm initdb
 
 COPY . .
 
