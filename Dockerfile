@@ -13,5 +13,5 @@ COPY . .
 EXPOSE 80
 
 CMD [ "npm", "run", "initdb" ]
-# Running the application (Entrypoint?=)
+
 ENTRYPOINT [ "npm", "run", "dev" ]
