@@ -1,7 +1,7 @@
 FROM node:14-alpine
 
 #create app directory
-WORKDIR /home/adminuser/myagent/_work/1/s/
+WORKDIR /home/adminuser/src
 
 #install all dependencies
 COPY package*.json ./
