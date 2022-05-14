@@ -1,0 +1,13 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: quickstart
+spec:
+  version: 7.14.0
+  nodeSets:
+    - name: default
+      count: 1
+      config:
+        node.store.allow_mmap: false
+# 6E0s1Wf4IwQ69Oc24Dc84vEZ
+# *${data.kubernetes.container.id}.log

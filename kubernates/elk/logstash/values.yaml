@@ -1,0 +1,62 @@
+---
+replicas: 1
+
+logstashPipeline:
+  logstash.conf: |
+    input {
+    	beats {
+    		port => 5044
+    	}
+    }
+    output {
+      elasticsearch{
+        hosts => "https://quickstart-es-http:9200"
+        user => "elastic"
+        password => "6E0s1Wf4IwQ69Oc24Dc84vEZ"
+        index => "logstash-myapp-%{+YYYY.MM.dd}"
+        cacert => '/usr/share/logstash/ssl/ca.crt'  
+      }
+
+      # if [kubernetes][labels][demo] == "myrepo" {
+    	#   elasticsearch {
+    	#   	hosts => "https://quickstart-es-http:9200"
+      #     user => "elastic"
+      #     password => "6E0s1Wf4IwQ69Oc24Dc84vEZ"
+      #     index => "logstash-myrepo-%{+YYYY.MM.dd}"
+      #     cacert => '/usr/share/logstash/ssl/ca.crt'
+      #   }
+    	# }
+      # else {
+      #   elasticsearch {
+    	#     hosts => "https://quickstart-es-http:9200"
+      #     user => "elastic"
+      #     password => "6E0s1Wf4IwQ69Oc24Dc84vEZ"
+      #     index => "Wheight-tracker-%{+YYYY.MM.dd}"
+      #     cacert => '/usr/share/logstash/ssl/ca.crt'
+      #   }
+      # }
+    }
+
+envFrom:
+  - secretRef:
+      name: quickstart-es-elastic-user
+
+secretMounts:
+  - name: ca-certs
+    path: /usr/share/logstash/ssl
+    secretName: quickstart-es-http-certs-public
+
+image: "docker.elastic.co/logstash/logstash"
+imageTag: "7.14.0"
+
+service:
+  annotations: {}
+  type: ClusterIP
+  ports:
+    - name: beats
+      port: 5044
+      protocol: TCP
+      targetPort: 5044
+
+ingress:
+  enabled: false
