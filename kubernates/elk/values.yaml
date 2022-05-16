@@ -16,25 +16,6 @@ logstashPipeline:
         index => "logstash-myapp-%{+YYYY.MM.dd}"
         cacert => '/usr/share/logstash/ssl/ca.crt'  
       }
-
-      # if [kubernetes][labels][demo] == "myrepo" {
-    	#   elasticsearch {
-    	#   	hosts => "https://quickstart-es-http:9200"
-      #     user => "elastic"
-      #     password => "6E0s1Wf4IwQ69Oc24Dc84vEZ"
-      #     index => "logstash-myrepo-%{+YYYY.MM.dd}"
-      #     cacert => '/usr/share/logstash/ssl/ca.crt'
-      #   }
-    	# }
-      # else {
-      #   elasticsearch {
-    	#     hosts => "https://quickstart-es-http:9200"
-      #     user => "elastic"
-      #     password => "6E0s1Wf4IwQ69Oc24Dc84vEZ"
-      #     index => "Wheight-tracker-%{+YYYY.MM.dd}"
-      #     cacert => '/usr/share/logstash/ssl/ca.crt'
-      #   }
-      # }
     }
 
 envFrom:

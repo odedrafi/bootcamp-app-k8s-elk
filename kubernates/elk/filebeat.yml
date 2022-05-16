@@ -22,6 +22,10 @@ spec:
     processors:
       - add_cloud_metadata: {}
       - add_host_metadata: {}
+      - drop_event:
+          when:
+            equals:
+              kubernetes.namespace: ingress-nginx
     output.logstash.hosts: logstash-logstash
   daemonSet:
     podTemplate:

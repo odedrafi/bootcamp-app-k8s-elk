@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: myrepo ## name oof deployment
+
 spec:
   replicas: 3 ## number of pods
   selector:
